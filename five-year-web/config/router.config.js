@@ -256,6 +256,12 @@ export default [
         ],
       },
       {
+        path: 'test/test-list',
+        component:'./Test/Test',
+        name: "文档",
+        icon: 'dashboard'
+      },
+      {
         component: '404',
       },
     ],
