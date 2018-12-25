@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.five.year.fiveyearblog.mapper.BlogArticleMapper" >
+  <resultMap id="BaseResultMap" type="com.five.year.fiveyearblog.entity.BlogArticle" >
+
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="TITLE" property="title" jdbcType="VARCHAR" />
+    <result column="CATEGORY" property="category" jdbcType="VARCHAR" />
+    <result column="CONTEXT" property="context" jdbcType="VARCHAR" />
+    <result column="READ_NUM" property="readNum" jdbcType="DECIMAL" />
+    <result column="POINT_NUM" property="pointNum" jdbcType="DECIMAL" />
+    <result column="OPENED" property="opened" jdbcType="DECIMAL" />
+    <result column="TOP" property="top" jdbcType="DECIMAL" />
+    <result column="ARTICLE_CAT" property="articleCat" jdbcType="DECIMAL" />
+    <result column="TS" property="ts" jdbcType="TIMESTAMP" />
+    <result column="CREAT_ID" property="creatId" jdbcType="VARCHAR" />
+    <result column="CREAT_TIME" property="creatTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, TITLE, CATEGORY, CONTEXT, READ_NUM, POINT_NUM, OPENED, TOP, ARTICLE_CAT, TS, 
+    CREAT_ID, CREAT_TIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from BLOG_ARTICLE
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from BLOG_ARTICLE
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from BLOG_ARTICLE
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.five.year.fiveyearblog.entity.BlogArticle" >
+    insert into BLOG_ARTICLE (ID, TITLE, CATEGORY,
+      CONTEXT, READ_NUM, POINT_NUM, 
+      OPENED, TOP, ARTICLE_CAT, 
+      TS, CREAT_ID, CREAT_TIME
+      )
+    values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR}, 
+      #{context,jdbcType=VARCHAR}, #{readNum,jdbcType=DECIMAL}, #{pointNum,jdbcType=DECIMAL}, 
+      #{opened,jdbcType=DECIMAL}, #{top,jdbcType=DECIMAL}, #{articleCat,jdbcType=DECIMAL}, 
+      #{ts,jdbcType=TIMESTAMP}, #{creatId,jdbcType=VARCHAR}, #{creatTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.five.year.fiveyearblog.entity.BlogArticle" >
+    insert into BLOG_ARTICLE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="title != null" >
+        TITLE,
+      </if>
+      <if test="category != null" >
+        CATEGORY,
+      </if>
+      <if test="context != null" >
+        CONTEXT,
+      </if>
+      <if test="readNum != null" >
+        READ_NUM,
+      </if>
+      <if test="pointNum != null" >
+        POINT_NUM,
+      </if>
+      <if test="opened != null" >
+        OPENED,
+      </if>
+      <if test="top != null" >
+        TOP,
+      </if>
+      <if test="articleCat != null" >
+        ARTICLE_CAT,
+      </if>
+      <if test="ts != null" >
+        TS,
+      </if>
+      <if test="creatId != null" >
+        CREAT_ID,
+      </if>
+      <if test="creatTime != null" >
+        CREAT_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null" >
+        #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="context != null" >
+        #{context,jdbcType=VARCHAR},
+      </if>
+      <if test="readNum != null" >
+        #{readNum,jdbcType=DECIMAL},
+      </if>
+      <if test="pointNum != null" >
+        #{pointNum,jdbcType=DECIMAL},
+      </if>
+      <if test="opened != null" >
+        #{opened,jdbcType=DECIMAL},
+      </if>
+      <if test="top != null" >
+        #{top,jdbcType=DECIMAL},
+      </if>
+      <if test="articleCat != null" >
+        #{articleCat,jdbcType=DECIMAL},
+      </if>
+      <if test="ts != null" >
+        #{ts,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatId != null" >
+        #{creatId,jdbcType=VARCHAR},
+      </if>
+      <if test="creatTime != null" >
+        #{creatTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.five.year.fiveyearblog.entity.BlogArticle" >
+    update BLOG_ARTICLE
+    <set >
+      <if test="title != null" >
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null" >
+        CATEGORY = #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="context != null" >
+        CONTEXT = #{context,jdbcType=VARCHAR},
+      </if>
+      <if test="readNum != null" >
+        READ_NUM = #{readNum,jdbcType=DECIMAL},
+      </if>
+      <if test="pointNum != null" >
+        POINT_NUM = #{pointNum,jdbcType=DECIMAL},
+      </if>
+      <if test="opened != null" >
+        OPENED = #{opened,jdbcType=DECIMAL},
+      </if>
+      <if test="top != null" >
+        TOP = #{top,jdbcType=DECIMAL},
+      </if>
+      <if test="articleCat != null" >
+        ARTICLE_CAT = #{articleCat,jdbcType=DECIMAL},
+      </if>
+      <if test="ts != null" >
+        TS = #{ts,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatId != null" >
+        CREAT_ID = #{creatId,jdbcType=VARCHAR},
+      </if>
+      <if test="creatTime != null" >
+        CREAT_TIME = #{creatTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.five.year.fiveyearblog.entity.BlogArticle" >
+    update BLOG_ARTICLE
+    set TITLE = #{title,jdbcType=VARCHAR},
+      CATEGORY = #{category,jdbcType=VARCHAR},
+      CONTEXT = #{context,jdbcType=VARCHAR},
+      READ_NUM = #{readNum,jdbcType=DECIMAL},
+      POINT_NUM = #{pointNum,jdbcType=DECIMAL},
+      OPENED = #{opened,jdbcType=DECIMAL},
+      TOP = #{top,jdbcType=DECIMAL},
+      ARTICLE_CAT = #{articleCat,jdbcType=DECIMAL},
+      TS = #{ts,jdbcType=TIMESTAMP},
+      CREAT_ID = #{creatId,jdbcType=VARCHAR},
+      CREAT_TIME = #{creatTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
