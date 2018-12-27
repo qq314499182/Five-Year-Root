@@ -42,6 +42,10 @@ class SearchList extends Component {
         key: 'applications',
         tab: '应用',
       },
+      {
+        key: 'homepage',
+        tab: '首页',
+      },
     ];
 
     const mainSearch = (

@@ -132,6 +132,11 @@ export default [
                 name: 'applications',
                 component: './List/Applications',
               },
+              {
+                path: '/list/search/homepage',
+                name: '首页',
+                component: './List/Homepage',
+              },
             ],
           },
         ],
