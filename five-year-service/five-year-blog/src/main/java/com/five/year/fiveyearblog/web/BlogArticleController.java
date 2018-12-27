@@ -35,7 +35,6 @@ public class BlogArticleController {
         Integer pageNum = (Integer)map.get("pageNum");
         Integer pageSize = (Integer)map.get("pageSize");
         return blogArticleService.findByPage(pageNum,pageSize);
-
     }
 
     @GetMapping("findAll")
