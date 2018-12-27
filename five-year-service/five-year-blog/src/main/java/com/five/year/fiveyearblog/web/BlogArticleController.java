@@ -31,16 +31,11 @@ public class BlogArticleController {
 
     @PostMapping
     public List<BlogArticle> findAll(@RequestBody String json){
-        try {
-            Map map = JSONUtils.jsonToMap(json);
-            Integer pageNum = (Integer)map.get("pageNum");
-            Integer pageSize = (Integer)map.get("pageSize");
-            Thread.sleep(2000);
-            return blogArticleService.findByPage(pageNum,pageSize);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return null;
+        Map map = JSONUtils.jsonToMap(json);
+        Integer pageNum = (Integer)map.get("pageNum");
+        Integer pageSize = (Integer)map.get("pageSize");
+        return blogArticleService.findByPage(pageNum,pageSize);
+
     }
 
     @GetMapping("findAll")
