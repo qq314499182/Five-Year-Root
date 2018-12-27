@@ -25,10 +25,9 @@ public class BlogArticleService {
         return mapper.selectByPrimaryKey(id);
     }
 
-    public PageInfo<BlogArticle> findByPage(Integer pageNum, Integer pageSize) {
+    public List<BlogArticle> findByPage(Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum,pageSize);
-        List<BlogArticle> blogArticles = mapper.selectAll();
-        return new PageInfo<>(blogArticles);
+        return mapper.selectAll();
     }
 
     public List<BlogArticle> findAll(int pageNum, int pageSize) {

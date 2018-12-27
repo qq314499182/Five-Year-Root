@@ -2,14 +2,13 @@ package com.five.year.fiveyearblog.web;
 
 import com.five.year.fiveyearblog.entity.BlogArticle;
 import com.five.year.fiveyearblog.service.BlogArticleService;
+import com.five.year.fiveyearblog.util.JSONUtils;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -31,8 +30,17 @@ public class BlogArticleController {
     }
 
     @PostMapping
-    public PageInfo<BlogArticle> findAll(Integer pageNum, Integer pageSize){
-        return blogArticleService.findByPage(pageNum,pageSize);
+    public List<BlogArticle> findAll(@RequestBody String json){
+        try {
+            Map map = JSONUtils.jsonToMap(json);
+            Integer pageNum = (Integer)map.get("pageNum");
+            Integer pageSize = (Integer)map.get("pageSize");
+            Thread.sleep(2000);
+            return blogArticleService.findByPage(pageNum,pageSize);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @GetMapping("findAll")

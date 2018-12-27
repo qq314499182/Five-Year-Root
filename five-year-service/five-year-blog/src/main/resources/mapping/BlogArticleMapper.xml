@@ -6,7 +6,7 @@
     <id column="ID" property="id" jdbcType="VARCHAR" />
     <result column="TITLE" property="title" jdbcType="VARCHAR" />
     <result column="CATEGORY" property="category" jdbcType="VARCHAR" />
-    <result column="CONTEXT" property="context" jdbcType="VARCHAR" />
+    <result column="CONTENT" property="content" jdbcType="VARCHAR" />
     <result column="READ_NUM" property="readNum" jdbcType="DECIMAL" />
     <result column="POINT_NUM" property="pointNum" jdbcType="DECIMAL" />
     <result column="OPENED" property="opened" jdbcType="DECIMAL" />
@@ -17,7 +17,7 @@
     <result column="CREAT_TIME" property="creatTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, TITLE, CATEGORY, CONTEXT, READ_NUM, POINT_NUM, OPENED, TOP, ARTICLE_CAT, TS, 
+    ID, TITLE, CATEGORY, CONTENT, READ_NUM, POINT_NUM, OPENED, TOP, ARTICLE_CAT, TS,
     CREAT_ID, CREAT_TIME
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
@@ -37,12 +37,12 @@
   </delete>
   <insert id="insert" parameterType="com.five.year.fiveyearblog.entity.BlogArticle" >
     insert into BLOG_ARTICLE (ID, TITLE, CATEGORY,
-      CONTEXT, READ_NUM, POINT_NUM, 
+      CONTENT, READ_NUM, POINT_NUM,
       OPENED, TOP, ARTICLE_CAT, 
       TS, CREAT_ID, CREAT_TIME
       )
     values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR}, 
-      #{context,jdbcType=VARCHAR}, #{readNum,jdbcType=DECIMAL}, #{pointNum,jdbcType=DECIMAL}, 
+      #{content,jdbcType=VARCHAR}, #{readNum,jdbcType=DECIMAL}, #{pointNum,jdbcType=DECIMAL},
       #{opened,jdbcType=DECIMAL}, #{top,jdbcType=DECIMAL}, #{articleCat,jdbcType=DECIMAL}, 
       #{ts,jdbcType=TIMESTAMP}, #{creatId,jdbcType=VARCHAR}, #{creatTime,jdbcType=TIMESTAMP}
       )
@@ -59,8 +59,8 @@
       <if test="category != null" >
         CATEGORY,
       </if>
-      <if test="context != null" >
-        CONTEXT,
+      <if test="content != null" >
+        CONTENT,
       </if>
       <if test="readNum != null" >
         READ_NUM,
@@ -97,8 +97,8 @@
       <if test="category != null" >
         #{category,jdbcType=VARCHAR},
       </if>
-      <if test="context != null" >
-        #{context,jdbcType=VARCHAR},
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
       </if>
       <if test="readNum != null" >
         #{readNum,jdbcType=DECIMAL},
@@ -135,8 +135,8 @@
       <if test="category != null" >
         CATEGORY = #{category,jdbcType=VARCHAR},
       </if>
-      <if test="context != null" >
-        CONTEXT = #{context,jdbcType=VARCHAR},
+      <if test="content != null" >
+        CONTENT = #{content,jdbcType=VARCHAR},
       </if>
       <if test="readNum != null" >
         READ_NUM = #{readNum,jdbcType=DECIMAL},
@@ -169,7 +169,7 @@
     update BLOG_ARTICLE
     set TITLE = #{title,jdbcType=VARCHAR},
       CATEGORY = #{category,jdbcType=VARCHAR},
-      CONTEXT = #{context,jdbcType=VARCHAR},
+      CONTENT = #{content,jdbcType=VARCHAR},
       READ_NUM = #{readNum,jdbcType=DECIMAL},
       POINT_NUM = #{pointNum,jdbcType=DECIMAL},
       OPENED = #{opened,jdbcType=DECIMAL},

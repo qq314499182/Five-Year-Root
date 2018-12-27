@@ -12,7 +12,7 @@ public class BlogArticle {
     private String id;
     private String title;
     private String category;
-    private String context;
+    private String content;
     private BigDecimal readNum;
     private BigDecimal pointNum;
     private Short opened;
