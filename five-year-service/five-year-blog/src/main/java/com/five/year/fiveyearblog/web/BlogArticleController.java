@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+
 /**
  * @Description
  * @Author zhaoke <zhaokep@yonyou.com>
@@ -31,7 +32,12 @@ public class BlogArticleController {
 
     @PostMapping
     public PageInfo<BlogArticle> findAll(Integer pageNum, Integer pageSize){
-        return blogArticleService.findAll(pageNum,pageSize);
+        return blogArticleService.findByPage(pageNum,pageSize);
+    }
+
+    @GetMapping("findAll")
+    public List<BlogArticle> findAll(){
+        return blogArticleService.findAll(0,5);
     }
 
 }
