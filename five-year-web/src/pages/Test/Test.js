@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import {Card} from 'antd';
+import {getTimeDistance} from '@/utils/utils';
 
 export default class TestFrom extends Component{
   constructor(props) {
@@ -22,6 +23,7 @@ export default class TestFrom extends Component{
   render() {
     return (
       <div>
+        <AddBlog/>
         {
           this.state.data.map(card => {
             return (
