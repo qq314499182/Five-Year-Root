@@ -85,6 +85,11 @@ export default [
             authority: ['admin'],
             component: './Forms/AdvancedForm',
           },
+          {
+            path: '/form/add-blog',
+            name: '新增文章',
+            component: './Forms/AddBlog',
+          },
         ],
       },
       // list

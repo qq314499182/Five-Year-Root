@@ -1,11 +1,14 @@
 package com.five.year.fiveyearblog.service;
 
+import com.five.year.fiveyearblog.base.BaseEntity;
+import com.five.year.fiveyearblog.base.BaseService;
 import com.five.year.fiveyearblog.entity.BlogArticle;
 import com.five.year.fiveyearblog.mapper.BlogArticleMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,7 +19,7 @@ import java.util.List;
  * @Date 2018/12/25
  */
 @Service
-public class BlogArticleService {
+public class BlogArticleService extends BaseService<BlogArticle> {
 
     @Autowired
     private BlogArticleMapper mapper;
@@ -33,5 +36,13 @@ public class BlogArticleService {
     public List<BlogArticle> findAll(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
         return mapper.selectAll();
+    }
+
+    @Transactional
+    public String create(BlogArticle blogArticle) {
+        BlogArticle fillBlogArticle = this.fillParam(blogArticle);
+        int insert = mapper.insert(fillBlogArticle);
+        System.out.println(insert);
+        return "OK";
     }
 }

@@ -24,7 +24,7 @@ public class BlogArticleController {
     @Autowired
     private BlogArticleService blogArticleService;
 
-    @GetMapping
+    @GetMapping("findOne")
     public BlogArticle findOne(String id){
         return blogArticleService.findOne(id);
     }
@@ -40,6 +40,11 @@ public class BlogArticleController {
     @GetMapping("findAll")
     public List<BlogArticle> findAll(){
         return blogArticleService.findAll(0,5);
+    }
+
+    @PostMapping("create")
+    public String create(@RequestBody BlogArticle blogArticle){
+        return blogArticleService.create(blogArticle);
     }
 
 }
