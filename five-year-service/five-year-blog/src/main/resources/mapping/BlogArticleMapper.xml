@@ -6,7 +6,8 @@
     <id column="ID" property="id" jdbcType="VARCHAR" />
     <result column="TITLE" property="title" jdbcType="VARCHAR" />
     <result column="CATEGORY" property="category" jdbcType="VARCHAR" />
-    <result column="CONTENT" property="content" jdbcType="VARCHAR" />
+    <result column="CONTENT_LIST" property="contentList" jdbcType="VARCHAR" />
+    <result column="CONTENT" property="content" jdbcType="CLOB" javaType = "java.lang.String" />
     <result column="READ_NUM" property="readNum" jdbcType="DECIMAL" />
     <result column="POINT_NUM" property="pointNum" jdbcType="DECIMAL" />
     <result column="OPENED" property="opened" jdbcType="DECIMAL" />
@@ -17,7 +18,7 @@
     <result column="CREAT_TIME" property="creatTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, TITLE, CATEGORY, CONTENT, READ_NUM, POINT_NUM, OPENED, TOP, ARTICLE_CAT, TS,
+    ID, TITLE, CATEGORY, CONTENT, CONTENT_LIST, READ_NUM, POINT_NUM, OPENED, TOP, ARTICLE_CAT, TS,
     CREAT_ID, CREAT_TIME
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
@@ -36,15 +37,31 @@
     where ID = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.five.year.fiveyearblog.entity.BlogArticle" >
-    insert into BLOG_ARTICLE (ID, TITLE, CATEGORY,
-      CONTENT, READ_NUM, POINT_NUM,
-      OPENED, TOP, ARTICLE_CAT, 
-      TS, CREAT_ID, CREAT_TIME
+    insert into BLOG_ARTICLE (
+            ID,
+            TITLE,
+            CATEGORY,
+            CONTENT,
+            CONTENT_LIST,
+            OPENED,
+            TOP,
+            ARTICLE_CAT,
+            TS,
+            CREAT_ID,
+            CREAT_TIME
       )
-    values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR}, 
-      #{content,jdbcType=VARCHAR}, #{readNum,jdbcType=DECIMAL}, #{pointNum,jdbcType=DECIMAL},
-      #{opened,jdbcType=DECIMAL}, #{top,jdbcType=DECIMAL}, #{articleCat,jdbcType=DECIMAL}, 
-      #{ts,jdbcType=TIMESTAMP}, #{creatId,jdbcType=VARCHAR}, #{creatTime,jdbcType=TIMESTAMP}
+    values (
+      #{id,jdbcType=VARCHAR},
+      #{title,jdbcType=VARCHAR},
+      #{category,jdbcType=VARCHAR},
+      #{content,jdbcType=VARCHAR},
+      #{contentList,jdbcType=VARCHAR},
+      #{opened,jdbcType=DECIMAL},
+      #{top,jdbcType=DECIMAL},
+      #{articleCat,jdbcType=DECIMAL},
+      #{ts,jdbcType=TIMESTAMP},
+      #{creatId,jdbcType=VARCHAR},
+      #{creatTime,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.five.year.fiveyearblog.entity.BlogArticle" >

@@ -22,13 +22,13 @@ public class FiveYearBlogApplicationTests {
 	@Test
 	public void contextLoads() {
 		for (int i = 0; i < 50; i++) {
-            BlogArticle blogArticle = new BlogArticle();
-            blogArticle.setContent("段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。");
-            blogArticle.setId(UUID.randomUUID().toString());
-            blogArticle.setTitle("哈哈哈哈哈哈哈哈");
-            blogArticle.setPointNum(new BigDecimal(12312312));
-            blogArticle.setReadNum(new BigDecimal(12312312));
-            mapper.insert(blogArticle);
+//            BlogArticle blogArticle = new BlogArticle();
+//            blogArticle.setContent("段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。");
+//            blogArticle.setId(UUID.randomUUID().toString());
+//            blogArticle.setTitle("哈哈哈哈哈哈哈哈");
+//            blogArticle.setPointNum(new BigDecimal(12312312));
+//            blogArticle.setReadNum(new BigDecimal(12312312));
+//            mapper.insert(blogArticle);
         }
 	}
 

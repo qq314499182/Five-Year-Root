@@ -29,7 +29,7 @@ public class BlogArticleService extends BaseService<BlogArticle> {
     }
 
     public List<BlogArticle> findByPage(Integer pageNum, Integer pageSize) {
-        PageHelper.startPage(pageNum,pageSize);
+        PageHelper.startPage(pageNum,pageSize,"opened,ts desc");
         return mapper.selectAll();
     }
 
@@ -41,8 +41,22 @@ public class BlogArticleService extends BaseService<BlogArticle> {
     @Transactional
     public String create(BlogArticle blogArticle) {
         BlogArticle fillBlogArticle = this.fillParam(blogArticle);
+        fillBlogArticle = this.getContentList(fillBlogArticle);
         int insert = mapper.insert(fillBlogArticle);
-        System.out.println(insert);
-        return "OK";
+        if(insert == 1){
+            return "OK";
+        }else {
+            return "ERROR";
+        }
+    }
+
+    private BlogArticle getContentList(BlogArticle blogArticle){
+        String content = blogArticle.getContent();
+        int conStart = content.indexOf("<p>");
+        int conEnd = content.indexOf("</p>");
+        String contentList = content.substring(conStart, conEnd);
+        blogArticle.setContentList(contentList);
+        return blogArticle;
+
     }
 }

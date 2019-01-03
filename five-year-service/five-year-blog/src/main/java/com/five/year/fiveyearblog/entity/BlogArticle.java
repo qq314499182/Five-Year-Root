@@ -3,6 +3,7 @@ package com.five.year.fiveyearblog.entity;
 import com.five.year.fiveyearblog.base.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
+import oracle.sql.CLOB;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -16,9 +17,14 @@ public class BlogArticle extends BaseEntity {
     private String title;
 
     /**
+     * 列表显示内容
+     */
+    private String contentList;
+
+    /**
      * 分类
      */
-    private String category = "后端语言";
+    private String category ;
 
     /**
      * 内容
@@ -28,27 +34,27 @@ public class BlogArticle extends BaseEntity {
     /**
      * 阅读数
      */
-    private BigDecimal readNum = BigDecimal.ZERO;
+    private BigDecimal readNum ;
 
     /**
      * 点赞数
      */
-    private BigDecimal pointNum = BigDecimal.ZERO;
+    private BigDecimal pointNum ;
 
     /**
      * 是否公开
      */
-    private Short opened = 0;
+    private Short opened;
 
     /**
      * 是否置顶
      */
-    private Short top = 0;
+    private Short top ;
 
     /**
      * 文章类型
      */
-    private Short articleCat = 0;
+    private Short articleCat;
 
 
 }
