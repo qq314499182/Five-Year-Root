@@ -30,8 +30,8 @@ public class BaseService<TEntity extends BaseEntity> {
         final Date date = new Date();
         entity.setId(UUID.randomUUID().toString());
         entity.setTs(date);
-        entity.setCreatId("五岁程序员");
-        entity.setCreatTime(date);
+        entity.setCreateId("五岁程序员");
+        entity.setCreateTime(date);
         return entity;
     }
 

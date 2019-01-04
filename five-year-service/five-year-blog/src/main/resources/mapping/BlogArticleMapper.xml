@@ -8,18 +8,18 @@
     <result column="CATEGORY" property="category" jdbcType="VARCHAR" />
     <result column="CONTENT_LIST" property="contentList" jdbcType="VARCHAR" />
     <result column="CONTENT" property="content" jdbcType="CLOB" javaType = "java.lang.String" />
-    <result column="READ_NUM" property="readNum" jdbcType="DECIMAL" />
-    <result column="POINT_NUM" property="pointNum" jdbcType="DECIMAL" />
-    <result column="OPENED" property="opened" jdbcType="DECIMAL" />
-    <result column="TOP" property="top" jdbcType="DECIMAL" />
-    <result column="ARTICLE_CAT" property="articleCat" jdbcType="DECIMAL" />
+    <result column="READ_NUM" property="readNum" jdbcType="INTEGER" />
+    <result column="POINT_NUM" property="pointNum" jdbcType="INTEGER" />
+    <result column="OPENED" property="opened" jdbcType="INTEGER" />
+    <result column="IS_TOP" property="isTop" jdbcType="INTEGER" />
+    <result column="ARTICLE_CAT" property="articleCat" jdbcType="INTEGER" />
     <result column="TS" property="ts" jdbcType="TIMESTAMP" />
-    <result column="CREAT_ID" property="creatId" jdbcType="VARCHAR" />
-    <result column="CREAT_TIME" property="creatTime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_ID" property="createId" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, TITLE, CATEGORY, CONTENT, CONTENT_LIST, READ_NUM, POINT_NUM, OPENED, TOP, ARTICLE_CAT, TS,
-    CREAT_ID, CREAT_TIME
+    ID, TITLE, CATEGORY, CONTENT, CONTENT_LIST, READ_NUM, POINT_NUM, OPENED, IS_TOP, ARTICLE_CAT, TS,
+    CREATE_ID, CREATE_TIME
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -44,11 +44,11 @@
             CONTENT,
             CONTENT_LIST,
             OPENED,
-            TOP,
+            IS_TOP,
             ARTICLE_CAT,
             TS,
-            CREAT_ID,
-            CREAT_TIME
+            CREATE_ID,
+            CREATE_TIME
       )
     values (
       #{id,jdbcType=VARCHAR},
@@ -56,12 +56,12 @@
       #{category,jdbcType=VARCHAR},
       #{content,jdbcType=VARCHAR},
       #{contentList,jdbcType=VARCHAR},
-      #{opened,jdbcType=DECIMAL},
-      #{top,jdbcType=DECIMAL},
-      #{articleCat,jdbcType=DECIMAL},
+      #{opened,jdbcType=INTEGER},
+      #{isTop,jdbcType=INTEGER},
+      #{articleCat,jdbcType=INTEGER},
       #{ts,jdbcType=TIMESTAMP},
-      #{creatId,jdbcType=VARCHAR},
-      #{creatTime,jdbcType=TIMESTAMP}
+      #{createId,jdbcType=VARCHAR},
+      #{createTime,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.five.year.fiveyearblog.entity.BlogArticle" >
@@ -88,8 +88,8 @@
       <if test="opened != null" >
         OPENED,
       </if>
-      <if test="top != null" >
-        TOP,
+      <if test="isTop != null" >
+        IS_TOP,
       </if>
       <if test="articleCat != null" >
         ARTICLE_CAT,
@@ -97,11 +97,11 @@
       <if test="ts != null" >
         TS,
       </if>
-      <if test="creatId != null" >
-        CREAT_ID,
+      <if test="createId != null" >
+        CREATE_ID,
       </if>
-      <if test="creatTime != null" >
-        CREAT_TIME,
+      <if test="createTime != null" >
+        CREATE_TIME,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -118,28 +118,28 @@
         #{content,jdbcType=VARCHAR},
       </if>
       <if test="readNum != null" >
-        #{readNum,jdbcType=DECIMAL},
+        #{readNum,jdbcType=INTEGER},
       </if>
       <if test="pointNum != null" >
-        #{pointNum,jdbcType=DECIMAL},
+        #{pointNum,jdbcType=INTEGER},
       </if>
       <if test="opened != null" >
-        #{opened,jdbcType=DECIMAL},
+        #{opened,jdbcType=INTEGER},
       </if>
-      <if test="top != null" >
-        #{top,jdbcType=DECIMAL},
+      <if test="isTop != null" >
+        #{isTop,jdbcType=INTEGER},
       </if>
       <if test="articleCat != null" >
-        #{articleCat,jdbcType=DECIMAL},
+        #{articleCat,jdbcType=INTEGER},
       </if>
       <if test="ts != null" >
         #{ts,jdbcType=TIMESTAMP},
       </if>
-      <if test="creatId != null" >
-        #{creatId,jdbcType=VARCHAR},
+      <if test="createId != null" >
+        #{createId,jdbcType=VARCHAR},
       </if>
-      <if test="creatTime != null" >
-        #{creatTime,jdbcType=TIMESTAMP},
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -156,28 +156,28 @@
         CONTENT = #{content,jdbcType=VARCHAR},
       </if>
       <if test="readNum != null" >
-        READ_NUM = #{readNum,jdbcType=DECIMAL},
+        READ_NUM = #{readNum,jdbcType=INTEGER},
       </if>
       <if test="pointNum != null" >
-        POINT_NUM = #{pointNum,jdbcType=DECIMAL},
+        POINT_NUM = #{pointNum,jdbcType=INTEGER},
       </if>
       <if test="opened != null" >
-        OPENED = #{opened,jdbcType=DECIMAL},
+        OPENED = #{opened,jdbcType=INTEGER},
       </if>
-      <if test="top != null" >
-        TOP = #{top,jdbcType=DECIMAL},
+      <if test="isTop != null" >
+        IS_TOP = #{isTop,jdbcType=INTEGER},
       </if>
       <if test="articleCat != null" >
-        ARTICLE_CAT = #{articleCat,jdbcType=DECIMAL},
+        ARTICLE_CAT = #{articleCat,jdbcType=INTEGER},
       </if>
       <if test="ts != null" >
         TS = #{ts,jdbcType=TIMESTAMP},
       </if>
-      <if test="creatId != null" >
-        CREAT_ID = #{creatId,jdbcType=VARCHAR},
+      <if test="createId != null" >
+        CREATE_ID = #{createId,jdbcType=VARCHAR},
       </if>
-      <if test="creatTime != null" >
-        CREAT_TIME = #{creatTime,jdbcType=TIMESTAMP},
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where ID = #{id,jdbcType=VARCHAR}
@@ -187,14 +187,14 @@
     set TITLE = #{title,jdbcType=VARCHAR},
       CATEGORY = #{category,jdbcType=VARCHAR},
       CONTENT = #{content,jdbcType=VARCHAR},
-      READ_NUM = #{readNum,jdbcType=DECIMAL},
-      POINT_NUM = #{pointNum,jdbcType=DECIMAL},
-      OPENED = #{opened,jdbcType=DECIMAL},
-      TOP = #{top,jdbcType=DECIMAL},
-      ARTICLE_CAT = #{articleCat,jdbcType=DECIMAL},
+      READ_NUM = #{readNum,jdbcType=INTEGER},
+      POINT_NUM = #{pointNum,jdbcType=INTEGER},
+      OPENED = #{opened,jdbcType=INTEGER},
+      IS_TOP = #{isTop,jdbcType=INTEGER},
+      ARTICLE_CAT = #{articleCat,jdbcType=INTEGER},
       TS = #{ts,jdbcType=TIMESTAMP},
-      CREAT_ID = #{creatId,jdbcType=VARCHAR},
-      CREAT_TIME = #{creatTime,jdbcType=TIMESTAMP}
+      CREATE_ID = #{createId,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
     where ID = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

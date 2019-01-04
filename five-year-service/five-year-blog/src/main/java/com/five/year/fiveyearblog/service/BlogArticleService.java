@@ -6,10 +6,14 @@ import com.five.year.fiveyearblog.entity.BlogArticle;
 import com.five.year.fiveyearblog.mapper.BlogArticleMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -41,7 +45,8 @@ public class BlogArticleService extends BaseService<BlogArticle> {
     @Transactional
     public String create(BlogArticle blogArticle) {
         BlogArticle fillBlogArticle = this.fillParam(blogArticle);
-        fillBlogArticle = this.getContentList(fillBlogArticle);
+        String contentList = this.getContentList(fillBlogArticle.getContent());
+        fillBlogArticle.setContentList(contentList);
         int insert = mapper.insert(fillBlogArticle);
         if(insert == 1){
             return "OK";
@@ -50,13 +55,12 @@ public class BlogArticleService extends BaseService<BlogArticle> {
         }
     }
 
-    private BlogArticle getContentList(BlogArticle blogArticle){
-        String content = blogArticle.getContent();
-        int conStart = content.indexOf("<p>");
-        int conEnd = content.indexOf("</p>");
-        String contentList = content.substring(conStart, conEnd);
-        blogArticle.setContentList(contentList);
-        return blogArticle;
-
+    private String getContentList(@NotNull(message = "content内容不能为空") String content){
+        Document document = Jsoup.parseBodyFragment(content);
+        String contentList = document.selectFirst("p").text();
+        if(content.length() > 200){
+            contentList = contentList.substring(0, 201)+"...........";
+        }
+        return contentList;
     }
 }

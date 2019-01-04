@@ -44,17 +44,17 @@ public class BlogArticle extends BaseEntity {
     /**
      * 是否公开
      */
-    private Short opened;
+    private Integer opened;
 
     /**
      * 是否置顶
      */
-    private Short top ;
+    private Integer isTop ;
 
     /**
      * 文章类型
      */
-    private Short articleCat;
+    private Integer articleCat;
 
 
 }

@@ -3,6 +3,9 @@ package com.five.year.fiveyearblog;
 import com.five.year.fiveyearblog.entity.BlogArticle;
 import com.five.year.fiveyearblog.mapper.BlogArticleMapper;
 import com.five.year.fiveyearblog.service.BlogArticleService;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +35,14 @@ public class FiveYearBlogApplicationTests {
         }
 	}
 
+	@Test
+	public void contentListLoads(){
+		BlogArticle blogArticle = mapper.selectByPrimaryKey("ac5158f3-5b5c-48c5-bace-ed0c1be9e5e7");
+		Document document = Jsoup.parseBodyFragment(blogArticle.getContent());
+		Element p = document.selectFirst("p");
+		String text = p.text();
+		System.out.println(text);
+	}
 
 
 

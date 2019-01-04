@@ -28,11 +28,11 @@ public class BaseEntity implements Serializable {
     /**
      * 创建人
      */
-    private String creatId;
+    private String createId;
 
     /**
      * 创建时间
      */
-    private Date creatTime;
+    private Date createTime;
 
 }

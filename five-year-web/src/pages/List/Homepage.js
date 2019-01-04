@@ -1,7 +1,7 @@
 import React,{Component,Fragment} from 'react';
 import {Form, Card, Select, List, Tag, Icon, Row, Col, Button,Pagination} from 'antd';
 import styles from "../List/Articles.less";
-import ArticleListContent from '@/components/ArticleListContent';
+import ContentList from './ContentList';
 
 const pageSize = 5;
 const baseUrl = 'http://127.0.0.1:8080/blog-article';
@@ -97,8 +97,7 @@ componentDidMount(){
                 key={item.id}
                 actions={[
                   <IconText type="star-o" text={item.readNum} />,
-                  <IconText type="like-o" text={item.pointNum} />,
-                  //<IconText type="message" text={item.message} />,
+                  <IconText type="like-o" text={item.pointNum} />
                 ]}
                 extra={<div className={styles.listItemExtra} />}
               >
@@ -116,7 +115,7 @@ componentDidMount(){
                     </span>
                   }
                 />
-                <ArticleListContent data={item} />
+                <ContentList data={item} />
               </List.Item>
             )}
           />
