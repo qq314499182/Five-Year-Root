@@ -163,6 +163,11 @@ export default [
             authority: ['admin'],
             component: './Profile/AdvancedProfile',
           },
+          {
+            path: '/profile/BlogDetail',
+            name: '文章详情',
+            component: './Profile/BlogDetail',
+          },
         ],
       },
       {
