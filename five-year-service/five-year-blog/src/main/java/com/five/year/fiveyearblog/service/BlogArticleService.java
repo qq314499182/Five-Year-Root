@@ -58,7 +58,7 @@ public class BlogArticleService extends BaseService<BlogArticle> {
     private String getContentList(@NotNull(message = "content内容不能为空") String content){
         Document document = Jsoup.parseBodyFragment(content);
         String contentList = document.selectFirst("p").text();
-        if(content.length() > 200){
+        if(contentList.length() > 200){
             contentList = contentList.substring(0, 201)+"...........";
         }
         return contentList;

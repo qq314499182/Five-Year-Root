@@ -1,5 +1,6 @@
 import React,{Component,Fragment} from 'react';
 import {Form, Card, Select, List, Tag, Icon, Row, Col, Button,Pagination} from 'antd';
+import router from 'umi/router';
 import styles from "../List/Articles.less";
 import ContentList from './ContentList';
 
@@ -54,7 +55,18 @@ componentDidMount(){
         })
       })
     })
-  }
+  };
+
+  getDetil = (item) =>{
+    router.push(
+      {
+        pathname: '/profile/BlogDetail',
+        query: {
+          id: item.id
+        },
+      }
+    )
+  };
 
 
   render() {
@@ -103,7 +115,7 @@ componentDidMount(){
               >
                 <List.Item.Meta
                   title={
-                    <a className={styles.listItemMetaTitle} href={item.href}>
+                    <a className={styles.listItemMetaTitle} onClick={()=>this.getDetil(item)}>
                       {item.title}
                     </a>
                   }
