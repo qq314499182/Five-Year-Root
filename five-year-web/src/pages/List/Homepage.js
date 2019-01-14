@@ -6,15 +6,16 @@ import ContentList from './ContentList';
 
 const pageSize = 5;
 const baseUrl = 'http://127.0.0.1:8080/blog-article';
-
+const id = 0;
 
 export default class TestFrom extends Component{
-    state = {
+
+  state = {
       data:[],
       loading: false,
-      pageNum:1
+      pageNum:1,
+      id:null
     };
-
 
 componentDidMount(){
     this.getData((data)=>{
@@ -25,13 +26,17 @@ componentDidMount(){
     })
   }
 
+  //分页获取列表数据
   getData = (callback) => {
     const opts = {
         method:"post",
         body:JSON.stringify({
           pageNum: this.state.pageNum,
           pageSize: pageSize,
-        })
+        }),
+        headers: {
+          "Content-Type": "application/json;charset=UTF-8"
+         },
       };
       fetch(baseUrl,opts).then(res=>{
         if(res.ok){
@@ -42,6 +47,32 @@ componentDidMount(){
       })
   };
 
+  //分页获取列表数据
+  getPoint = (id) => {
+    const opts = {
+      method:"post",
+      body:JSON.stringify({
+        id:id
+      }),
+      headers: {
+        "Content-Type": "application/json;charset=UTF-8"
+      },
+    };
+    fetch(baseUrl+'/point',opts).then(res=>{
+      if(res.ok){
+        const data = [...this.state.data];
+        for (let i=0;i<data.length;i++) {
+          if(data[i].id == id){
+            data[i].pointNum+=1;
+          };
+        }
+        this.setState({data});
+      }
+    })
+  };
+
+
+  //加载更多项
   fetchMore = () =>{
     this.setState({
       pageNum:this.state.pageNum + 1,
@@ -57,6 +88,7 @@ componentDidMount(){
     })
   };
 
+  //跳转详情页
   getDetil = (item) =>{
     router.push(
       {
@@ -68,10 +100,21 @@ componentDidMount(){
     )
   };
 
+  //点赞
+  pointHandler = (id) =>{
+    this.getPoint(id);
+}
 
   render() {
     const IconText = ({ type, text }) => (
       <span>
+        <Icon type={type} style={{ marginRight: 8 }} />
+        {text}
+      </span>
+    );
+
+    const IconPoint = ({ type, text , id }) => (
+      <span onClick={()=>this.pointHandler(id)}>
         <Icon type={type} style={{ marginRight: 8 }} />
         {text}
       </span>
@@ -108,8 +151,8 @@ componentDidMount(){
               <List.Item
                 key={item.id}
                 actions={[
-                  <IconText type="star-o" text={item.readNum} />,
-                  <IconText type="like-o" text={item.pointNum} />
+                  <IconText type="read-o" text={item.readNum} />,
+                  <IconPoint type="like-o" text={item.pointNum} id={item.id}/>
                 ]}
                 extra={<div className={styles.listItemExtra} />}
               >

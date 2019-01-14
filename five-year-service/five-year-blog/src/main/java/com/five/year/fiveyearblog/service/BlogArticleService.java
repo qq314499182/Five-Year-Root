@@ -13,7 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.security.auth.callback.Callback;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -42,7 +44,7 @@ public class BlogArticleService extends BaseService<BlogArticle> {
         return mapper.selectAll();
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public String create(BlogArticle blogArticle) {
         BlogArticle fillBlogArticle = this.fillParam(blogArticle);
         String contentList = this.getContentList(fillBlogArticle.getContent());
@@ -62,5 +64,13 @@ public class BlogArticleService extends BaseService<BlogArticle> {
             contentList = contentList.substring(0, 201)+"...........";
         }
         return contentList;
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public String point(String id) {
+        BlogArticle blogArticle = mapper.selectByPrimaryKey(id);
+        blogArticle.setPointNum(blogArticle.getPointNum().add(BigDecimal.ONE));
+        mapper.updateByPrimaryKeySelective(blogArticle);
+        return "OK";
     }
 }
