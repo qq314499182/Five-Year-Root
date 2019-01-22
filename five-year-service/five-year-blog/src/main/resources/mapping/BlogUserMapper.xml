@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.five.year.fiveyearblog.mapper.BlogUserMapper" >
+  <resultMap id="BaseResultMap" type="com.five.year.fiveyearblog.entity.BlogUser" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="USER_NAME" property="userName" jdbcType="VARCHAR" />
+    <result column="USER_PASSWORD" property="userPassword" jdbcType="VARCHAR" />
+    <result column="USER_PHONE" property="userPhone" jdbcType="VARCHAR" />
+    <result column="USER_EMAIL" property="userEmail" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="ENABLE" property="enable" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, USER_NAME, USER_PASSWORD, USER_PHONE, USER_EMAIL, CREATE_TIME, ENABLE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from BLOG_USER
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="loadUserByUsername" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from BLOG_USER
+    where USER_NAME = #{userName,jdbcType=VARCHAR}
+    and ENABLE = 1
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from BLOG_USER
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.five.year.fiveyearblog.entity.BlogUser" >
+    insert into BLOG_USER (ID, USER_NAME, USER_PASSWORD, 
+      USER_PHONE, USER_EMAIL, CREATE_TIME, 
+      ENABLE)
+    values (#{id,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{userPassword,jdbcType=VARCHAR}, 
+      #{userPhone,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{enable,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.five.year.fiveyearblog.entity.BlogUser" >
+    insert into BLOG_USER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="userName != null" >
+        USER_NAME,
+      </if>
+      <if test="userPassword != null" >
+        USER_PASSWORD,
+      </if>
+      <if test="userPhone != null" >
+        USER_PHONE,
+      </if>
+      <if test="userEmail != null" >
+        USER_EMAIL,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="enable != null" >
+        ENABLE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null" >
+        #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null" >
+        #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null" >
+        #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enable != null" >
+        #{enable,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.five.year.fiveyearblog.entity.BlogUser" >
+    update BLOG_USER
+    <set >
+      <if test="userName != null" >
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null" >
+        USER_PASSWORD = #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null" >
+        USER_PHONE = #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null" >
+        USER_EMAIL = #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enable != null" >
+        ENABLE = #{enable,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.five.year.fiveyearblog.entity.BlogUser" >
+    update BLOG_USER
+    set USER_NAME = #{userName,jdbcType=VARCHAR},
+      USER_PASSWORD = #{userPassword,jdbcType=VARCHAR},
+      USER_PHONE = #{userPhone,jdbcType=VARCHAR},
+      USER_EMAIL = #{userEmail,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      ENABLE = #{enable,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,19 +1,16 @@
 package com.five.year.fiveyearblog.service;
 
-import com.five.year.fiveyearblog.base.BaseEntity;
 import com.five.year.fiveyearblog.base.BaseService;
 import com.five.year.fiveyearblog.entity.BlogArticle;
 import com.five.year.fiveyearblog.mapper.BlogArticleMapper;
 import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.security.auth.callback.Callback;
+import javax.annotation.Resource;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.List;

@@ -32,7 +32,7 @@ componentDidMount(){
         method:"post",
         body:JSON.stringify({
           pageNum: this.state.pageNum,
-          pageSize: pageSize,
+          pageSize: pageSize
         }),
         headers: {
           "Content-Type": "application/json;charset=UTF-8"
@@ -47,7 +47,7 @@ componentDidMount(){
       })
   };
 
-  //分页获取列表数据
+  //点赞
   getPoint = (id) => {
     const opts = {
       method:"post",
@@ -71,7 +71,6 @@ componentDidMount(){
     })
   };
 
-
   //加载更多项
   fetchMore = () =>{
     this.setState({
@@ -90,20 +89,13 @@ componentDidMount(){
 
   //跳转详情页
   getDetil = (item) =>{
-    router.push(
-      {
+    router.push({
         pathname: '/profile/BlogDetail',
         query: {
           id: item.id
-        },
-      }
-    )
+        }
+      })
   };
-
-  //点赞
-  pointHandler = (id) =>{
-    this.getPoint(id);
-}
 
   render() {
     const IconText = ({ type, text }) => (
@@ -114,7 +106,7 @@ componentDidMount(){
     );
 
     const IconPoint = ({ type, text , id }) => (
-      <span onClick={()=>this.pointHandler(id)}>
+      <span onClick={()=>this.getPoint(id)}>
         <Icon type={type} style={{ marginRight: 8 }} />
         {text}
       </span>

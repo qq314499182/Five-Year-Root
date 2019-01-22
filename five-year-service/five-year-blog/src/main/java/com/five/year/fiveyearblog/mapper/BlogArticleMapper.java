@@ -6,8 +6,18 @@ import java.util.List;
 
 public interface BlogArticleMapper {
 
+    /**
+     * 根据id删除对象
+     * @param id 主键
+     * @return 成功返回1
+     */
     int deleteByPrimaryKey(String id);
 
+    /**
+     * 新增操作
+     * @param record 对象
+     * @return 成功返回1
+     */
     int insert(BlogArticle record);
 
     int insertSelective(BlogArticle record);
