@@ -56,29 +56,33 @@ export const getRequest = (url,body = null) => {
   return checkStatus(promise);
 };
 
-export const postRequest = (url,body) => {
-  const promise = fetch(url,{
+export const postRequest = (url,body,callback) => {
+
+  fetch(url,{
     method : HttpMethod.POST,
     headers: getHeaders(),
     body : JSON.stringify(body)
-  });
-  return checkStatus(promise);
+  }).then((response) => {
+    if(response.status === 200){
+      return response.json();
+    }
+    if(response.status ===404){
+      router.push('/exception/404');
+    }
+    if(response.status ===403 ){
+      router.push('/exception/403');
+    }
+    else {
+      router.push('/exception/500');
+    }
+  }).then(rep=>{
+    if(rep){
+      callback(rep)
+    }
+
+  })
 };
 
-export const checkStatus = response => {
-  if(response.status === 200){
-    return response.json();
-  }
-  if(response.status ===404){
-    router.push('/exception/404');
-  }
-  if(response.status ===403 ){
-    router.push('/exception/403');
-  }
-  else {
-    router.push('/exception/403');
-  }
-};
 
 
 

@@ -1,5 +1,6 @@
 package com.five.year.fiveyearblog.entity;
 
+import com.five.year.fiveyearblog.base.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
@@ -18,14 +19,9 @@ import java.util.Date;
  */
 @Setter
 @Getter
-public class BlogUser implements UserDetails {
+public class BlogUser extends BaseEntity implements UserDetails {
 
     private static final Short ENABLE_FALSE = 0;
-
-    /**
-     * 主键
-     */
-    private String id;
 
     /**
      * 用户名
@@ -46,11 +42,6 @@ public class BlogUser implements UserDetails {
      * 邮箱
      */
     private String userEmail;
-
-    /**
-     * 创建时间
-     */
-    private Date createTime;
 
     /**
      * 启用(0 未启用  1启用)

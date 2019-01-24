@@ -9,9 +9,11 @@
     <result column="USER_EMAIL" property="userEmail" jdbcType="VARCHAR" />
     <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
     <result column="ENABLE" property="enable" jdbcType="DECIMAL" />
+    <result column="TS" property="ts" jdbcType="TIMESTAMP" />
+    <result column="CREATE_ID" property="createId" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ID, USER_NAME, USER_PASSWORD, USER_PHONE, USER_EMAIL, CREATE_TIME, ENABLE
+    ID, USER_NAME, USER_PASSWORD, USER_PHONE, USER_EMAIL, CREATE_TIME, ENABLE, CREATE_ID, TS
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -31,12 +33,26 @@
     where ID = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.five.year.fiveyearblog.entity.BlogUser" >
-    insert into BLOG_USER (ID, USER_NAME, USER_PASSWORD, 
-      USER_PHONE, USER_EMAIL, CREATE_TIME, 
-      ENABLE)
-    values (#{id,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{userPassword,jdbcType=VARCHAR}, 
-      #{userPhone,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{enable,jdbcType=DECIMAL})
+    insert into BLOG_USER (
+            ID,
+            USER_NAME,
+            USER_PASSWORD,
+            USER_PHONE,
+            USER_EMAIL,
+            CREATE_TIME,
+            ENABLE,
+            CREATE_ID,
+            TS)
+    values (
+       #{id,jdbcType=VARCHAR},
+       #{userName,jdbcType=VARCHAR},
+       #{userPassword,jdbcType=VARCHAR},
+       #{userPhone,jdbcType=VARCHAR},
+       #{userEmail,jdbcType=VARCHAR},
+       #{createTime,jdbcType=TIMESTAMP},
+       #{enable,jdbcType=DECIMAL},
+       #{createId,jdbcType=VARCHAR},
+       #{ts,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.five.year.fiveyearblog.entity.BlogUser" >
     insert into BLOG_USER
@@ -62,6 +78,12 @@
       <if test="enable != null" >
         ENABLE,
       </if>
+      <if test="createId != null" >
+          CREATE_ID,
+      </if>
+    <if test="ts != null" >
+        TS,
+    </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -84,6 +106,12 @@
       </if>
       <if test="enable != null" >
         #{enable,jdbcType=DECIMAL},
+      </if>
+      <if test="createId != null" >
+        #{CREATE_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null" >
+        #{TS,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -108,6 +136,12 @@
       <if test="enable != null" >
         ENABLE = #{enable,jdbcType=DECIMAL},
       </if>
+      <if test="createId != null" >
+        CREATE_ID = #{createId,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null" >
+        TS = #{ts,jdbcType=DECIMAL},
+      </if>
     </set>
     where ID = #{id,jdbcType=VARCHAR}
   </update>
@@ -118,7 +152,9 @@
       USER_PHONE = #{userPhone,jdbcType=VARCHAR},
       USER_EMAIL = #{userEmail,jdbcType=VARCHAR},
       CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
-      ENABLE = #{enable,jdbcType=DECIMAL}
+      ENABLE = #{enable,jdbcType=DECIMAL},
+      CREATE_ID = #{createId,jdbcType=DECIMAL},
+      TS = #{ts,jdbcType=DECIMAL}
     where ID = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>
