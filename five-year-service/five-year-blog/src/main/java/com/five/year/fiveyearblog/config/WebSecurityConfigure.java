@@ -77,7 +77,8 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
                 //开启自动配置的登陆功能
                 .and()
                 //自定义登录请求路径(post请求)
-                .formLogin().loginProcessingUrl("/login")
+                .formLogin().usernameParameter("userName").passwordParameter("userPassword")
+                .loginProcessingUrl("/login")
                 //验证成功处理器
                 .successHandler(authenticationSuccessHandler)
                 //验证失败处理器
