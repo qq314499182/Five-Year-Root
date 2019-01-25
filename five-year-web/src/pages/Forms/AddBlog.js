@@ -26,6 +26,7 @@ class AddBlog extends PureComponent {
     const elem = this.node;
     const editor = new Edit(elem);
     editor.customConfig.uploadImgShowBase64 = true;
+    editor.customConfig.zIndex = 100;
     editor.customConfig.onchange = (html) => {
       this.setState({
         editorHtml: html,
