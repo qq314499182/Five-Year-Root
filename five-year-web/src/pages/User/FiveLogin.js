@@ -5,16 +5,16 @@ import Link from 'umi/link';
 import { Checkbox, Alert, Icon } from 'antd';
 import Login from '@/components/Login';
 import styles from './Login.less';
+import {postFromRequest} from '@/utils/restfulUtils';
+import router from 'umi/router';
 
 const { Tab, UserName, Password, Mobile, Captcha, Submit } = Login;
+const baseUrl = 'http://127.0.0.1:8080/login';
 
-@connect(({ login, loading }) => ({
-  login,
-  submitting: loading.effects['login/login'],
-}))
 class LoginPage extends Component {
   state = {
     type: 'account',
+    loginState: true,
     autoLogin: true,
   };
 
@@ -40,16 +40,16 @@ class LoginPage extends Component {
     });
 
   handleSubmit = (err, values) => {
-    const { type } = this.state;
     if (!err) {
-      const { dispatch } = this.props;
-      dispatch({
-        type: 'login/login',
-        payload: {
-          ...values,
-          type,
-        },
-      });
+      postFromRequest(baseUrl,values,res =>{
+        console.log(res);
+        if(res.status === 401){
+          this.setState({loginState : false});
+        }
+        if(res.status ===  200){
+          router.push("/list/search/homepage")
+        }
+      })
     }
   };
 
@@ -64,8 +64,8 @@ class LoginPage extends Component {
   );
 
   render() {
-    const { login, submitting } = this.props;
-    const { type, autoLogin } = this.state;
+    const {  submitting } = this.props;
+    const { type, autoLogin,loginState } = this.state;
     return (
       <div className={styles.main}>
         <Login
@@ -77,9 +77,8 @@ class LoginPage extends Component {
           }}
         >
           <Tab key="account" tab={formatMessage({ id: 'app.login.tab-login-credentials' })}>
-            {login.status === 'error' &&
-              login.type === 'account' &&
-              !submitting &&
+            { !loginState &&
+              type === 'account' &&
               this.renderMessage(formatMessage({ id: 'app.login.message-invalid-credentials' }))}
             <UserName
               name="userName"
@@ -92,7 +91,7 @@ class LoginPage extends Component {
               ]}
             />
             <Password
-              name="password"
+              name="userPassword"
               placeholder={`${formatMessage({ id: 'app.login.password' })}: ant.design`}
               rules={[
                 {
@@ -103,42 +102,42 @@ class LoginPage extends Component {
               onPressEnter={() => this.loginForm.validateFields(this.handleSubmit)}
             />
           </Tab>
-          <Tab key="mobile" tab={formatMessage({ id: 'app.login.tab-login-mobile' })}>
-            {login.status === 'error' &&
-              login.type === 'mobile' &&
-              !submitting &&
-              this.renderMessage(
-                formatMessage({ id: 'app.login.message-invalid-verification-code' })
-              )}
-            <Mobile
-              name="mobile"
-              placeholder={formatMessage({ id: 'form.phone-number.placeholder' })}
-              rules={[
-                {
-                  required: true,
-                  message: formatMessage({ id: 'validation.phone-number.required' }),
-                },
-                {
-                  pattern: /^1\d{10}$/,
-                  message: formatMessage({ id: 'validation.phone-number.wrong-format' }),
-                },
-              ]}
-            />
-            <Captcha
-              name="captcha"
-              placeholder={formatMessage({ id: 'form.verification-code.placeholder' })}
-              countDown={120}
-              onGetCaptcha={this.onGetCaptcha}
-              getCaptchaButtonText={formatMessage({ id: 'form.get-captcha' })}
-              getCaptchaSecondText={formatMessage({ id: 'form.captcha.second' })}
-              rules={[
-                {
-                  required: true,
-                  message: formatMessage({ id: 'validation.verification-code.required' }),
-                },
-              ]}
-            />
-          </Tab>
+          {/*<Tab key="mobile" tab={formatMessage({ id: 'app.login.tab-login-mobile' })}>*/}
+            {/*{login.status === 'error' &&*/}
+              {/*login.type === 'mobile' &&*/}
+              {/*!submitting &&*/}
+              {/*this.renderMessage(*/}
+                {/*formatMessage({ id: 'app.login.message-invalid-verification-code' })*/}
+              {/*)}*/}
+            {/*<Mobile*/}
+              {/*name="mobile"*/}
+              {/*placeholder={formatMessage({ id: 'form.phone-number.placeholder' })}*/}
+              {/*rules={[*/}
+                {/*{*/}
+                  {/*required: true,*/}
+                  {/*message: formatMessage({ id: 'validation.phone-number.required' }),*/}
+                {/*},*/}
+                {/*{*/}
+                  {/*pattern: /^1\d{10}$/,*/}
+                  {/*message: formatMessage({ id: 'validation.phone-number.wrong-format' }),*/}
+                {/*},*/}
+              {/*]}*/}
+            {/*/>*/}
+            {/*<Captcha*/}
+              {/*name="captcha"*/}
+              {/*placeholder={formatMessage({ id: 'form.verification-code.placeholder' })}*/}
+              {/*countDown={120}*/}
+              {/*onGetCaptcha={this.onGetCaptcha}*/}
+              {/*getCaptchaButtonText={formatMessage({ id: 'form.get-captcha' })}*/}
+              {/*getCaptchaSecondText={formatMessage({ id: 'form.captcha.second' })}*/}
+              {/*rules={[*/}
+                {/*{*/}
+                  {/*required: true,*/}
+                  {/*message: formatMessage({ id: 'validation.verification-code.required' }),*/}
+                {/*},*/}
+              {/*]}*/}
+            {/*/>*/}
+          {/*</Tab>*/}
           <div>
             <Checkbox checked={autoLogin} onChange={this.changeAutoLogin}>
               <FormattedMessage id="app.login.remember-me" />

@@ -19,6 +19,9 @@ public class UrlAuthenticationSuccessHandler implements AuthenticationSuccessHan
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException {
+        httpServletResponse.setHeader("Content-type", "application/json;charset=UTF-8");
+        httpServletResponse.setHeader("Access-Control-Allow-Origin", "*");
+        httpServletResponse.setHeader("Cache-Control", "no-cache");
         httpServletResponse.setCharacterEncoding("UTF-8");
         httpServletResponse.setStatus(200);
         httpServletResponse.getWriter().write("登陆成功");

@@ -19,6 +19,9 @@ public class UrlAuthenticationFailureHandler implements AuthenticationFailureHan
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException {
+        httpServletResponse.setHeader("Content-type", "application/json;charset=UTF-8");
+        httpServletResponse.setHeader("Access-Control-Allow-Origin", "*");
+        httpServletResponse.setHeader("Cache-Control", "no-cache");
         httpServletResponse.setCharacterEncoding("UTF-8");
         httpServletResponse.setStatus(401);
         httpServletResponse.getWriter().write("登陆失败");

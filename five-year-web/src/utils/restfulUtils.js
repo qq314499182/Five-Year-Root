@@ -23,7 +23,7 @@ const codeMessage = {
 
 export const ContentType = {
   JSON : "application/json;charset=UTF-8",
-  FORM : "application/x-www-form-urlencoded; charset=UTF-8"
+  FORM : "application/x-www-form-urlencoded;charset=UTF-8"
 };
 
 export const HttpMethod = {
@@ -34,13 +34,18 @@ export const HttpMethod = {
   DELETE : "DELETE"
 };
 
-//指定头信息并携带cookies信息
-const getHeaders = () => {
-  //const token = Cookies.get(COOKIE_TOKEN);
-  return {
-    "Content-Type": ContentType.JSON
-    //"Token": token
+//指定头信息
+const getHeaders = (type) => {
+  if(type === 'json'){
+    return {
+      "Content-Type": ContentType.JSON
+    }
+  }else {
+    return {
+      "Content-Type": ContentType.FORM
+    }
   }
+
 };
 
 export const getRequest = (url,body = null) => {
@@ -51,16 +56,17 @@ export const getRequest = (url,body = null) => {
 
   const promise = fetch(url,{
     method : HttpMethod.GET,
-    headers: getHeaders(),
+    headers: getHeaders('from'),
+    credentials: "include" //携带cookie信息
   });
   return checkStatus(promise);
 };
 
 export const postRequest = (url,body,callback) => {
-
   fetch(url,{
     method : HttpMethod.POST,
-    headers: getHeaders(),
+    headers: getHeaders('json'),
+    credentials: "include", //携带cookie信息
     body : JSON.stringify(body)
   }).then((response) => {
     if(response.status === 200){
@@ -79,8 +85,43 @@ export const postRequest = (url,body,callback) => {
     if(rep){
       callback(rep)
     }
-
   })
+};
+
+export const postFromRequest = (url,body,callback) => {
+  fetch(url,{
+    method : HttpMethod.POST,
+    headers: getHeaders('from'),
+    body : getFromData(body)
+  }).then((response) => {
+    if(response.status === 200){
+      return response;
+    }
+    if(response.status ===401){
+      return response
+    }
+    if(response.status ===404){
+      router.push('/exception/404');
+    }
+    if(response.status ===403 ){
+      router.push('/exception/403');
+    }
+    else {
+      router.push('/exception/500');
+    }
+  }).then(rep=>{
+    if(rep){
+      callback(rep)
+    }
+  })
+};
+
+ const getFromData = (data) => {
+  let formData = '';
+  for (let item in data) {
+    formData += `${encodeURIComponent(item)}=${encodeURIComponent(data[item])}&`
+  }
+  return formData;
 };
 
 

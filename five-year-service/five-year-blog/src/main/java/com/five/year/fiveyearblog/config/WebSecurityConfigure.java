@@ -21,6 +21,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
 
+    /**
+     * 自定义未登陆返回结果
+     */
     @Autowired
     private UrlAuthenticationEntryPoint authenticationEntryPoint;
 
@@ -71,7 +74,7 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
                 .httpBasic().authenticationEntryPoint(authenticationEntryPoint)
                 .and()
                 //开放api路径
-                .authorizeRequests().antMatchers("/api","/blog-article","/blog-article/findOne","/blog-user").
+                .authorizeRequests().antMatchers("/api","/blog-article","/blog-article/findOne","/blog-user/*","/login").
                 permitAll()
                 .anyRequest().authenticated()
                 //开启自动配置的登陆功能
