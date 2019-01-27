@@ -66,7 +66,6 @@ export const postRequest = (url,body,callback) => {
   fetch(url,{
     method : HttpMethod.POST,
     headers: getHeaders('json'),
-    credentials: "include", //携带cookie信息
     body : JSON.stringify(body)
   }).then((response) => {
     if(response.status === 200){

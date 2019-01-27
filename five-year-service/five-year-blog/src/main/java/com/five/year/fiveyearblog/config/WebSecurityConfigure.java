@@ -1,9 +1,6 @@
 package com.five.year.fiveyearblog.config;
 
-import com.five.year.fiveyearblog.handler.SelfAuthenticationProvider;
-import com.five.year.fiveyearblog.handler.UrlAuthenticationFailureHandler;
-import com.five.year.fiveyearblog.handler.UrlAuthenticationSuccessHandler;
-import com.five.year.fiveyearblog.handler.UrlLogoutSuccessHandler;
+import com.five.year.fiveyearblog.handler.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -51,6 +48,7 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
     @Autowired
     private UrlLogoutSuccessHandler logoutSuccessHandler;
 
+
     /**
      * 登录认证
      * @param auth 登陆管理器
@@ -74,7 +72,7 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
                 .httpBasic().authenticationEntryPoint(authenticationEntryPoint)
                 .and()
                 //开放api路径
-                .authorizeRequests().antMatchers("/api","/blog-article","/blog-article/findOne","/blog-user/*","/login").
+                .authorizeRequests().antMatchers("/api","/blog-article","/blog-article/findOne","/blog-user","/login").
                 permitAll()
                 .anyRequest().authenticated()
                 //开启自动配置的登陆功能

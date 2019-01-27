@@ -7,6 +7,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 /**
@@ -21,6 +22,9 @@ public class SelfAuthenticationProvider implements AuthenticationProvider {
     @Autowired
     private SelfUserDetailsServiceImpl userDetailsService;
 
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         //表单输入的用户名
@@ -28,10 +32,11 @@ public class SelfAuthenticationProvider implements AuthenticationProvider {
         //表单输入的密码
         String password = (String) authentication.getCredentials();
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-        if(!userDetails.getPassword().equals(password)){
+        if(bCryptPasswordEncoder.matches(password,userDetails.getPassword())){
+            return new UsernamePasswordAuthenticationToken(username,password,null);
+        }else {
             throw new BadCredentialsException("密码错误");
         }
-        return new UsernamePasswordAuthenticationToken(username,password,null);
     }
 
     @Override

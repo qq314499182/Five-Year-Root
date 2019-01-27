@@ -1,4 +1,4 @@
-package com.five.year.fiveyearblog.config;
+package com.five.year.fiveyearblog.handler;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
