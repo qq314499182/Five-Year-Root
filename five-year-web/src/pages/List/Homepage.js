@@ -30,13 +30,14 @@ componentDidMount(){
   getData = (callback) => {
     const opts = {
         method:"post",
+        // credentials : 'include',
         body:JSON.stringify({
           pageNum: this.state.pageNum,
           pageSize: pageSize
         }),
         headers: {
           "Content-Type": "application/json;charset=UTF-8"
-         },
+         }
       };
       fetch(baseUrl,opts).then(res=>{
         if(res.ok){

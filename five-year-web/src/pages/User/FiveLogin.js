@@ -42,13 +42,13 @@ class LoginPage extends Component {
   handleSubmit = (err, values) => {
     if (!err) {
       postFromRequest(baseUrl,values,res =>{
-        console.log(res);
         if(res.status === 401){
           this.setState({loginState : false});
         }
         if(res.status ===  200){
           router.push("/list/search/homepage")
         }
+        // console.log(res);
       })
     }
   };

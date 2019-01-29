@@ -92,12 +92,12 @@ export const postFromRequest = (url,body,callback) => {
     method : HttpMethod.POST,
     headers: getHeaders('from'),
     body : getFromData(body)
-  }).then((response) => {
+  }).then( response => {
     if(response.status === 200){
       return response;
     }
     if(response.status ===401){
-      return response
+      return response;
     }
     if(response.status ===404){
       router.push('/exception/404');
