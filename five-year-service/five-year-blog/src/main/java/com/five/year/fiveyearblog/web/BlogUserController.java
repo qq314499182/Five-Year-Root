@@ -2,6 +2,7 @@ package com.five.year.fiveyearblog.web;
 
 import com.five.year.fiveyearblog.entity.BlogUser;
 import com.five.year.fiveyearblog.service.BlogUserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,14 +13,21 @@ import org.springframework.web.bind.annotation.*;
  * @Date 2019/1/24
  */
 @RestController
-@RequestMapping("/blog-user")
+@RequestMapping("/five-service/blog-user")
+@Slf4j
 public class BlogUserController {
 
     @Autowired
     private BlogUserService blogUserService;
 
-    @PostMapping
+    @PostMapping("login")
     public String insert(@RequestBody BlogUser user){
         return blogUserService.insert(user);
+    }
+
+    @GetMapping("checkLogin")
+    public String checkLogin(){
+        log.info("该用户已登陆");
+        return "{\"status\":\"200\",\"msg\":\"" + "登陆成功" + "\"}";
     }
 }

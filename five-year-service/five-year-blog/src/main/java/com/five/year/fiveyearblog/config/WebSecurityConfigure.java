@@ -2,11 +2,13 @@ package com.five.year.fiveyearblog.config;
 
 import com.five.year.fiveyearblog.handler.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.AuthenticationEntryPoint;
 
 /**
  * @Description
@@ -72,25 +74,33 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
                 .httpBasic().authenticationEntryPoint(authenticationEntryPoint)
                 .and()
                 //开放api路径
-                .authorizeRequests().antMatchers("/api","/blog-article","/blog-article/findOne","/blog-user","/login").
+                .authorizeRequests().antMatchers("/api/**","/five-service/blog-article/search/**","/five-service/blog-article/point","/five-service/blog-user/login").
                 permitAll()
                 .anyRequest().authenticated()
                 //开启自动配置的登陆功能
                 .and()
                 //自定义登录请求路径(post请求)
                 .formLogin().usernameParameter("userName").passwordParameter("userPassword")
-                .loginProcessingUrl("/login")
+                .loginProcessingUrl("/five-service/login")
                 //验证成功处理器
                 .successHandler(authenticationSuccessHandler)
                 //验证失败处理器
                 .failureHandler(authenticationFailureHandler).permitAll()
+                .and()
+                //关闭拦截未登录自动跳转,改为返回json信息
+                .exceptionHandling().authenticationEntryPoint(selfLoginUrlAuthenticationEntryPoint())
                 //开启自动配置的注销功能
                 .and()
                 .logout()
                 // .logoutUrl("/nonceLogout") 自定义注销请求路径  默认/logout
                 //注销成功处理器
                 .logoutSuccessHandler(logoutSuccessHandler).permitAll();
-
-
     }
+
+
+    @Bean
+    public AuthenticationEntryPoint selfLoginUrlAuthenticationEntryPoint() {
+        return new SelfLoginUrlAuthenticationEntryPoint("/");
+    }
+
 }

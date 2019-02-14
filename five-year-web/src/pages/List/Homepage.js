@@ -3,9 +3,10 @@ import {Form, Card, Select, List, Tag, Icon, Row, Col, Button,Pagination} from '
 import router from 'umi/router';
 import styles from "../List/Articles.less";
 import ContentList from './ContentList';
+import {serviceIP} from '@/config/serviceIP';
 
 const pageSize = 5;
-const baseUrl = 'http://127.0.0.1:8080/blog-article';
+const baseUrl = serviceIP+'/five-service/blog-article';
 const id = 0;
 
 export default class TestFrom extends Component{
@@ -39,7 +40,7 @@ componentDidMount(){
           "Content-Type": "application/json;charset=UTF-8"
          }
       };
-      fetch(baseUrl,opts).then(res=>{
+      fetch(baseUrl+'/search/page',opts).then(res=>{
         if(res.ok){
           res.json().then(data=>{
             callback(data)

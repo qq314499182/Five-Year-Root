@@ -7,6 +7,8 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
@@ -19,25 +21,25 @@ import java.util.Map;
  * @Date 2018/12/25
  */
 @RestController
-@RequestMapping("/blog-article")
+@RequestMapping("/five-service/blog-article")
 public class BlogArticleController {
 
     @Autowired
     private BlogArticleService blogArticleService;
 
-    @GetMapping("findOne")
+    @GetMapping("search/findOne")
     public BlogArticle findOne(String id){
         return blogArticleService.findOne(id);
     }
 
-    @PostMapping
+    @PostMapping("search/page")
     public List<BlogArticle> findAll(@RequestBody Map map){
         Integer pageNum = (Integer)map.get("pageNum");
         Integer pageSize = (Integer)map.get("pageSize");
         return blogArticleService.findByPage(pageNum,pageSize);
     }
 
-    @GetMapping("findAll")
+    @GetMapping("search/findAll")
     public List<BlogArticle> findAll(){
         return blogArticleService.findAll(0,5);
     }

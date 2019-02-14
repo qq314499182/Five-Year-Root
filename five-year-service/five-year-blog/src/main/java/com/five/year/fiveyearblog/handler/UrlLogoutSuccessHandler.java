@@ -8,6 +8,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.WeakHashMap;
 
 /**
  * @Description
@@ -22,6 +24,9 @@ public class UrlLogoutSuccessHandler implements LogoutSuccessHandler {
     public void onLogoutSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
         httpServletResponse.setCharacterEncoding("UTF-8");
         httpServletResponse.setStatus(100);
-        httpServletResponse.getWriter().write("注销成功");
+        PrintWriter writer = httpServletResponse.getWriter();
+        writer.write("注销成功");
+        writer.flush();
+        writer.close();
     }
 }

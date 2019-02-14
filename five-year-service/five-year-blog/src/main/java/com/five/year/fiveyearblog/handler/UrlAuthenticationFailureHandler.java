@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * @Description
@@ -19,12 +20,13 @@ public class UrlAuthenticationFailureHandler implements AuthenticationFailureHan
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException {
-        httpServletResponse.setHeader("Content-type", "application/json;charset=UTF-8");
-        httpServletResponse.setHeader("Access-Control-Allow-Origin", "*");
-        httpServletResponse.setHeader("Cache-Control", "no-cache");
         httpServletResponse.setCharacterEncoding("UTF-8");
         httpServletResponse.setStatus(401);
-        httpServletResponse.getWriter().write("登陆失败");
+        PrintWriter writer = httpServletResponse.getWriter();
+        String sb = "{\"status\":\"401\",\"msg\":\"" + "登陆失败" + "\"}";
+        writer.write(sb);
+        writer.flush();
+        writer.close();
 
     }
 }

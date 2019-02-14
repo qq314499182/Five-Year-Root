@@ -3,8 +3,9 @@ import { connect } from 'dva';
 import { Col, Row, Card, Badge, Table, Divider } from 'antd';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import tittle from './Tittle.less';
+import {serviceIP} from '@/config/serviceIP';
 
-const baseUrl = 'http://127.0.0.1:8080/blog-article/findOne';
+const baseUrl = serviceIP+'/five-service/blog-article/search/findOne';
 class BasicProfile extends Component {
   state = {
     data:[],

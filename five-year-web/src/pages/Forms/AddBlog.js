@@ -5,11 +5,13 @@ import { formatMessage, FormattedMessage } from 'umi/locale';
 import {Form,Input, DatePicker, Select, Button, Card, InputNumber, Radio, Icon, Tooltip,} from 'antd';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import Edit from 'wangeditor';
+import {checkLogin} from '@/utils/restfulUtils';
+import {serviceIP} from '@/config/serviceIP';
 
 const FormItem = Form.Item;
 const { TextArea } = Input;
 
-const baseUrl = 'http://127.0.0.1:8080/blog-article/create';
+const baseUrl = serviceIP+'/five-service/blog-article/create';
 
 @Form.create()
 class AddBlog extends PureComponent {
@@ -23,6 +25,7 @@ class AddBlog extends PureComponent {
   }
 
   componentDidMount() {
+    checkLogin();
     const elem = this.node;
     const editor = new Edit(elem);
     editor.customConfig.uploadImgShowBase64 = true;

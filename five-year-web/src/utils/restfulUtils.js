@@ -1,7 +1,10 @@
 import fetch from 'dva/fetch';
 import { notification } from 'antd';
 import router from 'umi/router';
+import redirect from 'umi/redirect';
+import {serviceIP} from '@/config/serviceIP';
 
+const loginUrl = serviceIP+'/five-service/blog-user/checkLogin'
 
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
@@ -75,7 +78,7 @@ export const postRequest = (url,body,callback) => {
       router.push('/exception/404');
     }
     if(response.status ===403 ){
-      router.push('/exception/403');
+      redirect.to('/user/login')
     }
     else {
       router.push('/exception/500');
@@ -91,7 +94,8 @@ export const postFromRequest = (url,body,callback) => {
   fetch(url,{
     method : HttpMethod.POST,
     headers: getHeaders('from'),
-    body : getFromData(body)
+    body : getFromData(body),
+    credentials: "include"
   }).then( response => {
     if(response.status === 200){
       return response;
@@ -122,6 +126,23 @@ export const postFromRequest = (url,body,callback) => {
   }
   return formData;
 };
+
+ //检测登陆
+export const checkLogin = () => {
+   fetch(loginUrl,{
+     method : HttpMethod.GET,
+     headers: getHeaders('from'),
+     credentials: "include"
+   }).then(res =>{
+     if (res.ok){
+       res.json().then(data =>{
+         if(data.status == 403){
+           router.push('/user/login');
+         }
+       })
+     }
+   })
+ }
 
 
 

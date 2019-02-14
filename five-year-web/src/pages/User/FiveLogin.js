@@ -7,9 +7,10 @@ import Login from '@/components/Login';
 import styles from './Login.less';
 import {postFromRequest} from '@/utils/restfulUtils';
 import router from 'umi/router';
+import {serviceIP} from '@/config/serviceIP';
 
 const { Tab, UserName, Password, Mobile, Captcha, Submit } = Login;
-const baseUrl = 'http://127.0.0.1:8080/login';
+const baseUrl = serviceIP+'/five-service/login';
 
 class LoginPage extends Component {
   state = {
@@ -48,7 +49,6 @@ class LoginPage extends Component {
         if(res.status ===  200){
           router.push("/list/search/homepage")
         }
-        // console.log(res);
       })
     }
   };

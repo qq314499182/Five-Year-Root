@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
  * @Version V1.0.0
  * @Date 2018/12/11
  */
-@Configuration
+//@Configuration
 public class MyWebAppConfigurer extends WebMvcConfigurationSupport {
 
     @Override

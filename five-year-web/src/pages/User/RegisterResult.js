@@ -5,6 +5,9 @@ import Link from 'umi/link';
 import Result from '@/components/Result';
 import styles from './RegisterResult.less';
 
+
+
+
 const actions = (
   <div className={styles.actions}>
     <a href="">
@@ -12,7 +15,7 @@ const actions = (
         <FormattedMessage id="app.register-result.view-mailbox" />
       </Button>
     </a>
-    <Link to="/">
+    <Link to="/a">
       <Button size="large">
         <FormattedMessage id="app.register-result.back-home" />
       </Button>

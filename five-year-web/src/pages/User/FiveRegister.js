@@ -6,11 +6,12 @@ import router from 'umi/router';
 import { Form, Input, Button, Select, Row, Col, Popover, Progress } from 'antd';
 import styles from './Register.less';
 import {postRequest} from '@/utils/restfulUtils';
+import {serviceIP} from '@/config/serviceIP';
 
 const FormItem = Form.Item;
 const { Option } = Select;
 const InputGroup = Input.Group;
-const baseUrl = 'http://127.0.0.1:8080/blog-user';
+const baseUrl = serviceIP+'/five-service/blog-user/login';
 
 const passwordStatusMap = {
   ok: (
