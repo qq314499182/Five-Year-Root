@@ -1,5 +1,6 @@
 package com.five.year.fiveyearblog.web;
 
+import com.five.year.fiveyearblog.util.HttpResult;
 import com.five.year.fiveyearblog.entity.BlogUser;
 import com.five.year.fiveyearblog.service.BlogUserService;
 import lombok.extern.slf4j.Slf4j;
@@ -25,9 +26,12 @@ public class BlogUserController {
         return blogUserService.insert(user);
     }
 
+
     @GetMapping("checkLogin")
-    public String checkLogin(){
+    public HttpResult checkLogin(){
         log.info("该用户已登陆");
-        return "{\"status\":\"200\",\"msg\":\"" + "登陆成功" + "\"}";
+        return HttpResult.getResult(200,"用户已登陆");
     }
+
+
 }

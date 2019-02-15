@@ -46,7 +46,7 @@ public class BlogUser extends BaseEntity implements UserDetails {
     /**
      * 启用(0 未启用  1启用)
      */
-    private Short enable;
+    private Short enable = 1;
 
     /**
      * 用户的角色

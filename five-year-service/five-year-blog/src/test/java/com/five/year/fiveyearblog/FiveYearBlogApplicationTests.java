@@ -1,8 +1,11 @@
 package com.five.year.fiveyearblog;
 
+import com.five.year.fiveyearblog.cache.BlogUserCache;
 import com.five.year.fiveyearblog.entity.BlogArticle;
+import com.five.year.fiveyearblog.entity.BlogUser;
 import com.five.year.fiveyearblog.mapper.BlogArticleMapper;
 import com.five.year.fiveyearblog.service.BlogArticleService;
+import org.apache.ibatis.cache.decorators.BlockingCache;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -21,6 +24,9 @@ public class FiveYearBlogApplicationTests {
 
 	@Autowired
 	private BlogArticleMapper mapper;
+
+	@Autowired
+	private BlogUserCache blogUserCache;
 
 	@Test
 	public void contextLoads() {
@@ -44,7 +50,13 @@ public class FiveYearBlogApplicationTests {
 		System.out.println(text);
 	}
 
-
+	@Test
+	public void testCache(){
+		BlogUser blogUser = new BlogUser();
+		blogUser.setUserName("哈克叫啥空间很大");
+		blogUser.setUserPassword("asdkjhaskdjhaksjd");
+		blogUserCache.put("456",blogUser);
+	}
 
 }
 

@@ -1,9 +1,9 @@
 package com.five.year.fiveyearblog.handler;
 
+import com.five.year.fiveyearblog.util.HttpResult;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -22,11 +22,10 @@ public class SelfLoginUrlAuthenticationEntryPoint extends LoginUrlAuthentication
     }
 
     @Override
-    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
+    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException {
         response.setContentType("application/json;charset=utf-8");
         PrintWriter out = response.getWriter();
-        String sb = "{\"status\":\"403\",\"msg\":\"" + "未登陆" + "\"}";
-        out.write(sb);
+        out.write(HttpResult.getJsonResult(403,"未登陆"));
         out.flush();
         out.close();
     }

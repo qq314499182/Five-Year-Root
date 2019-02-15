@@ -92,6 +92,7 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
                 //开启自动配置的注销功能
                 .and()
                 .logout()
+                .logoutUrl("/five-service/logout")
                 // .logoutUrl("/nonceLogout") 自定义注销请求路径  默认/logout
                 //注销成功处理器
                 .logoutSuccessHandler(logoutSuccessHandler).permitAll();

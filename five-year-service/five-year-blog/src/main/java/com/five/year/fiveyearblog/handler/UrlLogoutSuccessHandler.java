@@ -23,9 +23,10 @@ public class UrlLogoutSuccessHandler implements LogoutSuccessHandler {
     @Override
     public void onLogoutSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
         httpServletResponse.setCharacterEncoding("UTF-8");
-        httpServletResponse.setStatus(100);
+        httpServletResponse.setStatus(200);
         PrintWriter writer = httpServletResponse.getWriter();
-        writer.write("注销成功");
+        String sb = "{\"status\":\"100\",\"msg\":\"" + "注销成功" + "\"}";
+        writer.write(sb);
         writer.flush();
         writer.close();
     }
