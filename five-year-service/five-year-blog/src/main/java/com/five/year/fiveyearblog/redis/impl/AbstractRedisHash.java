@@ -1,10 +1,8 @@
 package com.five.year.fiveyearblog.redis.impl;
 
-import com.alibaba.fastjson.JSON;
 import com.five.year.fiveyearblog.redis.inface.ReadRedisService;
 import com.five.year.fiveyearblog.redis.inface.WriteRedisService;
 import com.five.year.fiveyearblog.util.JSONUtils;
-import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.StringRedisTemplate;

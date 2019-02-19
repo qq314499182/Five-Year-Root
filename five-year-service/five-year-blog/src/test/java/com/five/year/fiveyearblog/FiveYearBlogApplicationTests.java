@@ -16,7 +16,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.IntStream;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -52,10 +53,21 @@ public class FiveYearBlogApplicationTests {
 
 	@Test
 	public void testCache(){
-		BlogUser blogUser = new BlogUser();
-		blogUser.setUserName("哈克叫啥空间很大");
-		blogUser.setUserPassword("asdkjhaskdjhaksjd");
-		blogUserCache.put("456",blogUser);
+//		BlogUser blogUser = new BlogUser();
+//		blogUser.setUserName("哈克叫啥空间很大");
+//		blogUser.setUserPassword("asdkjhaskdjhaksjd");
+//		blogUserCache.put("456",blogUser);
+//
+//		List<String> list = new ArrayList<>();
+		Map map =new HashMap<>();
+		map.put("a","v2");
+		for (int i = 0; i < 20; i++) {
+			String v1 = (String) map.computeIfAbsent("a",key -> {
+				map.put("a","v1");
+				return"v1";
+			});
+			System.out.println("~~~~~~~~~~~~~~~~~~~~"+v1);
+		}
 	}
 
 }

@@ -6,6 +6,11 @@ import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 
 @connect()
 class SearchList extends Component {
+
+  state= {
+    listValue: ''
+  }
+
   handleTabChange = key => {
     const { match } = this.props;
     switch (key) {
@@ -24,8 +29,7 @@ class SearchList extends Component {
   };
 
   handleFormSubmit = value => {
-    // eslint-disable-next-line
-    console.log(value);
+    this.setState({listValue:value})
   };
 
   render() {
@@ -64,11 +68,12 @@ class SearchList extends Component {
 
     return (
       <PageHeaderWrapper
-        title="搜索列表"
+        // title="搜索列表"
         content={mainSearch}
-        tabList={tabList}
+        // tabList={tabList}
         tabActiveKey={location.pathname.replace(`${match.path}/`, '')}
         onTabChange={this.handleTabChange}
+        listValue={this.state.listValue}
       >
         {children}
         {/* <Switch>

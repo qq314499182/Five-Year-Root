@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * @Description
  * @Author zhaoke <zhaokep@yonyou.com>
@@ -28,10 +30,10 @@ public class BlogUserController {
 
 
     @GetMapping("checkLogin")
-    public HttpResult checkLogin(){
-        log.info("该用户已登陆");
-        return HttpResult.getResult(200,"用户已登陆");
+    public HttpResult checkLogin(HttpServletRequest request){
+        return blogUserService.checkLogin(request);
     }
+
 
 
 }

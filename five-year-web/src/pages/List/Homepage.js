@@ -27,26 +27,29 @@ componentDidMount(){
     })
   }
 
+  componentWillReceiveProps(v){
+    console.log(this.props.listValue);
+  }
+
   //分页获取列表数据
   getData = (callback) => {
     const opts = {
-        method:"post",
-        // credentials : 'include',
-        body:JSON.stringify({
-          pageNum: this.state.pageNum,
-          pageSize: pageSize
-        }),
-        headers: {
-          "Content-Type": "application/json;charset=UTF-8"
-         }
-      };
-      fetch(baseUrl+'/search/page',opts).then(res=>{
-        if(res.ok){
-          res.json().then(data=>{
-            callback(data)
-          })
-        }
-      })
+      method:"post",
+      body:JSON.stringify({
+        pageNum: this.state.pageNum,
+        pageSize: pageSize
+      }),
+      headers: {
+        "Content-Type": "application/json;charset=UTF-8"
+      }
+    };
+    fetch(baseUrl+'/search/page',opts).then(res=>{
+      if(res.ok){
+        res.json().then(data=>{
+          callback(data)
+        })
+      }
+    })
   };
 
   //点赞
@@ -100,6 +103,7 @@ componentDidMount(){
   };
 
   render() {
+    console.log(this.props)
     const IconText = ({ type, text }) => (
       <span>
         <Icon type={type} style={{ marginRight: 8 }} />

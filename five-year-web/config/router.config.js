@@ -41,54 +41,55 @@ export default [
       },
       // forms
       {
-        path: '/form',
+        path: '/form/add-blog',
         icon: 'form',
-        name: 'form',
-        routes: [
-          {
-            path: '/form/basic-form',
-            name: 'basicform',
-            component: './Forms/BasicForm',
-          },
-          {
-            path: '/form/step-form',
-            name: 'stepform',
-            component: './Forms/StepForm',
-            hideChildrenInMenu: true,
-            routes: [
-              {
-                path: '/form/step-form',
-                redirect: '/form/step-form/info',
-              },
-              {
-                path: '/form/step-form/info',
-                name: 'info',
-                component: './Forms/StepForm/Step1',
-              },
-              {
-                path: '/form/step-form/confirm',
-                name: 'confirm',
-                component: './Forms/StepForm/Step2',
-              },
-              {
-                path: '/form/step-form/result',
-                name: 'result',
-                component: './Forms/StepForm/Step3',
-              },
-            ],
-          },
-          {
-            path: '/form/advanced-form',
-            name: 'advancedform',
-            authority: ['admin'],
-            component: './Forms/AdvancedForm',
-          },
-          {
-            path: '/form/add-blog',
-            name: '新增文章',
-            component: './Forms/AddBlog',
-          },
-        ],
+        name: 'add.blog',
+        component: './Forms/AddBlog'
+        // routes: [
+          // {
+          //   path: '/form/basic-form',
+          //   name: 'basicform',
+          //   component: './Forms/BasicForm',
+          // },
+          // {
+          //   path: '/form/step-form',
+          //   name: 'stepform',
+          //   component: './Forms/StepForm',
+          //   hideChildrenInMenu: true,
+          //   routes: [
+          //     {
+          //       path: '/form/step-form',
+          //       redirect: '/form/step-form/info',
+          //     },
+          //     {
+          //       path: '/form/step-form/info',
+          //       name: 'info',
+          //       component: './Forms/StepForm/Step1',
+          //     },
+          //     {
+          //       path: '/form/step-form/confirm',
+          //       name: 'confirm',
+          //       component: './Forms/StepForm/Step2',
+          //     },
+          //     {
+          //       path: '/form/step-form/result',
+          //       name: 'result',
+          //       component: './Forms/StepForm/Step3',
+          //     },
+          //   ],
+          // },
+          // {
+          //   path: '/form/advanced-form',
+          //   name: 'advancedform',
+          //   authority: ['admin'],
+          //   component: './Forms/AdvancedForm',
+          // },
+        //   {
+        //     path: '/form/add-blog',
+        //     name: '新增文章',
+        //     component: './Forms/AddBlog',
+        //   },
+        // ],
       },
       // list
       {
@@ -139,6 +140,7 @@ export default [
                 path: '/list/search/homepage',
                 name: '首页',
                 component: './List/Homepage',
+                hideInMenu: true,
               },
             ],
           },

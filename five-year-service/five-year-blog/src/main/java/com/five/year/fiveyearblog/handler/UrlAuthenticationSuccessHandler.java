@@ -1,5 +1,6 @@
 package com.five.year.fiveyearblog.handler;
 
+import com.five.year.fiveyearblog.util.HttpResult;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -22,11 +23,10 @@ public class UrlAuthenticationSuccessHandler implements AuthenticationSuccessHan
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException {
-        httpServletResponse.setCharacterEncoding("UTF-8");
+        httpServletResponse.setHeader("Content-Type", "application/json;charset=utf-8");
         httpServletResponse.setStatus(200);
         PrintWriter writer = httpServletResponse.getWriter();
-        String sb = "{\"status\":\"200\",\"msg\":\"" + "登陆成功" + "\"}";
-        writer.write(sb);
+        writer.write(HttpResult.getJsonResult(200,"登陆成功"));
         writer.flush();
         writer.close();
     }

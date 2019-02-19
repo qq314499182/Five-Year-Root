@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.AuthenticationEntryPoint;
 
 /**
@@ -69,7 +70,11 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.csrf().disable() //关闭csrf验证
+        http.csrf().disable()
+                //使用JWT,关闭Session
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                //关闭csrf验证
                 //自定义未登陆返回结果
                 .httpBasic().authenticationEntryPoint(authenticationEntryPoint)
                 .and()
@@ -93,9 +98,10 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutUrl("/five-service/logout")
-                // .logoutUrl("/nonceLogout") 自定义注销请求路径  默认/logout
                 //注销成功处理器
                 .logoutSuccessHandler(logoutSuccessHandler).permitAll();
+
+
     }
 
 

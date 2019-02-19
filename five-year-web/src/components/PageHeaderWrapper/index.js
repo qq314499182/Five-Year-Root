@@ -14,8 +14,8 @@ const PageHeaderWrapper = ({ children, contentWidth, wrapperClassName, top, ...r
       {value => (
         <PageHeader
           wide={contentWidth === 'Fixed'}
-          home={<FormattedMessage id="menu.home" defaultMessage="Home" />}
-          {...value}
+          // home={<FormattedMessage id="menu.home" defaultMessage="Home" />}
+          //{...value}
           key="pageheader"
           {...restProps}
           linkElement={Link}

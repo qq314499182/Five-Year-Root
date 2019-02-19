@@ -136,7 +136,7 @@ export const checkLogin = () => {
    }).then(res =>{
      if (res.ok){
        res.json().then(data =>{
-         if(data.status == 403){
+         if(data.state == 403){
            router.push('/user/login');
          }
        })
