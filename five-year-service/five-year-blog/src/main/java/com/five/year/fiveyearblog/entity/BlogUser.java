@@ -7,7 +7,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.Date;
 
 /**
  *
@@ -20,6 +19,14 @@ import java.util.Date;
 @Setter
 @Getter
 public class BlogUser extends BaseEntity implements UserDetails {
+
+    public BlogUser() {
+    }
+
+    public BlogUser(String userName, String userPassword) {
+        this.userName = userName;
+        this.userPassword = userPassword;
+    }
 
     private static final Short ENABLE_FALSE = 0;
 
@@ -47,6 +54,11 @@ public class BlogUser extends BaseEntity implements UserDetails {
      * 启用(0 未启用  1启用)
      */
     private Short enable = 1;
+
+    /**
+     * 是否记住我
+     */
+    private Boolean rememberMe = false;
 
     /**
      * 用户的角色

@@ -6,10 +6,10 @@ package com.five.year.fiveyearblog.cache;
  * @Version V1.0.0
  * @Date 2019/2/15
  */
-public class RedisTable {
+class RedisTable {
 
     /**
      * 用户空间
      */
-    public static final String BLOG_USER = "BLOG_USER";
+    static final String BLOG_USER = "BLOG_USER";
 }

@@ -4,6 +4,7 @@ import com.five.year.fiveyearblog.handler.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -99,7 +100,10 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
                 .logout()
                 .logoutUrl("/five-service/logout")
                 //注销成功处理器
-                .logoutSuccessHandler(logoutSuccessHandler).permitAll();
+                .logoutSuccessHandler(logoutSuccessHandler).permitAll()
+                .and()
+                //添加token过滤器
+                .addFilter(new TokenAuthenticationFilter(authenticationManagerBean()));
 
 
     }
@@ -108,6 +112,17 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
     @Bean
     public AuthenticationEntryPoint selfLoginUrlAuthenticationEntryPoint() {
         return new SelfLoginUrlAuthenticationEntryPoint("/");
+    }
+
+    /**
+     * 重写方法，是上下文可以获取本地缓存对象
+     * @return AuthenticationManager  本地缓存对象
+     * @throws Exception 异常
+     */
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 
 }

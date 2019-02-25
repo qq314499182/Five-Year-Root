@@ -1,8 +1,8 @@
 package com.five.year.fiveyearblog.handler;
 
 import com.five.year.fiveyearblog.util.HttpResult;
+import com.five.year.fiveyearblog.util.TokenUtils;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
@@ -23,6 +23,8 @@ public class UrlAuthenticationSuccessHandler implements AuthenticationSuccessHan
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException {
+        Cookie token = TokenUtils.createToken(httpServletRequest);
+        httpServletResponse.addCookie(token);
         httpServletResponse.setHeader("Content-Type", "application/json;charset=utf-8");
         httpServletResponse.setStatus(200);
         PrintWriter writer = httpServletResponse.getWriter();
