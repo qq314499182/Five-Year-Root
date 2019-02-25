@@ -1,5 +1,6 @@
 package com.five.year.fiveyearblog.handler;
 
+import com.five.year.fiveyearblog.util.HttpResult;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
@@ -23,8 +24,7 @@ public class UrlAuthenticationFailureHandler implements AuthenticationFailureHan
         httpServletResponse.setCharacterEncoding("UTF-8");
         httpServletResponse.setStatus(401);
         PrintWriter writer = httpServletResponse.getWriter();
-        String sb = "{\"status\":\"401\",\"msg\":\"" + "登陆失败" + "\"}";
-        writer.write(sb);
+        writer.write(HttpResult.getJsonResult(401,"登陆失败"));
         writer.flush();
         writer.close();
 
