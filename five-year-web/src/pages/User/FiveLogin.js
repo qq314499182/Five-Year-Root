@@ -9,7 +9,7 @@ import {postFromRequest} from '@/utils/restfulUtils';
 import router from 'umi/router';
 import {serviceIP} from '@/config/serviceIP';
 
-const { Tab, UserName, Password, Mobile, Captcha, Submit } = Login;
+const { Tab, UserName, Password, Mobile, Captcha, Submit,Validate } = Login;
 const baseUrl = serviceIP+'/five-service/login';
 
 class LoginPage extends Component {
@@ -100,6 +100,16 @@ class LoginPage extends Component {
                 },
               ]}
               onPressEnter={() => this.loginForm.validateFields(this.handleSubmit)}
+            />
+            <Validate
+              name="validate"
+              placeholder={`${formatMessage({ id: 'app.login.validate' })}`}
+              rules={[
+                {
+                  required: true,
+                  message: formatMessage({ id: 'validation.userName.required' }),
+                },
+              ]}
             />
           </Tab>
           {/*<Tab key="mobile" tab={formatMessage({ id: 'app.login.tab-login-mobile' })}>*/}

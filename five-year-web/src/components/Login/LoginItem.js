@@ -7,6 +7,8 @@ import LoginContext from './loginContext';
 
 const FormItem = Form.Item;
 
+const srcUrl = 'http://localhost:8080/api/getCode?';
+
 class WrapFormItem extends Component {
   static defaultProps = {
     getCaptchaButtonText: 'captcha',
@@ -17,6 +19,7 @@ class WrapFormItem extends Component {
     super(props);
     this.state = {
       count: 0,
+      url:srcUrl
     };
   }
 
@@ -36,11 +39,6 @@ class WrapFormItem extends Component {
     const result = onGetCaptcha ? onGetCaptcha() : null;
     if (result === false) {
       return;
-    }
-    if (result instanceof Promise) {
-      result.then(this.runGetCaptchaCountDown);
-    } else {
-      this.runGetCaptchaCountDown();
     }
   };
 
@@ -68,6 +66,11 @@ class WrapFormItem extends Component {
         clearInterval(this.interval);
       }
     }, 1000);
+  };
+
+  getValidate =() => {
+    const imgUrl = srcUrl+'?id='+new Date();
+    this.setState({url:imgUrl})
   };
 
   render() {
@@ -112,6 +115,22 @@ class WrapFormItem extends Component {
               >
                 {count ? `${count} ${getCaptchaSecondText}` : getCaptchaButtonText}
               </Button>
+            </Col>
+          </Row>
+        </FormItem>
+      );
+    }
+
+    if(type === 'Validate'){
+      const inputProps = omit(otherProps, ['onGetCaptcha', 'countDown']);
+      return (
+        <FormItem>
+          <Row gutter={8}>
+            <Col span={16}>
+              {getFieldDecorator(name, options)(<Input {...customprops} {...inputProps} />)}
+            </Col>
+            <Col span={8}>
+              <a onClick={this.getValidate}><img id={'validate'} src={this.state.url} /></a>
             </Col>
           </Row>
         </FormItem>

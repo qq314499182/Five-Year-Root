@@ -41,7 +41,7 @@ public class TokenAuthenticationFilter extends BasicAuthenticationFilter {
                 }
             }
         }
-        if(StringUtils.isNotBlank(token)){
+        if(StringUtils.isNotBlank(token) && TokenUtils.existByKey(token)){
             BlogUser user = TokenUtils.getUserByToken(token);
             SecurityContextHolder.getContext().setAuthentication(
                     new UsernamePasswordAuthenticationToken(

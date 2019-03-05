@@ -30,10 +30,7 @@ public class BlogUserController {
 
 
     @GetMapping("checkLogin")
-    public HttpResult checkLogin(HttpServletRequest request){
+    public HttpResult checkLogin(HttpServletRequest request) throws InterruptedException {
         return blogUserService.checkLogin(request);
     }
-
-
-
 }

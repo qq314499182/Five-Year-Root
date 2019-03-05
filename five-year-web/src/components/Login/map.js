@@ -32,6 +32,20 @@ export default {
       },
     ],
   },
+  Validate: {
+    props: {
+      size: 'large',
+      id: 'validate',
+      prefix: <Icon type="user" className={styles.prefixIcon} />,
+      placeholder: 'admin',
+    },
+    rules: [
+      {
+        required: true,
+        message: 'Please enter validate!',
+      },
+    ],
+  },
   Mobile: {
     props: {
       size: 'large',

@@ -23,12 +23,6 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
 
     /**
-     * 自定义未登陆返回结果
-     */
-    @Autowired
-    private UrlAuthenticationEntryPoint authenticationEntryPoint;
-
-    /**
      * 自定义登录认证
      */
     @Autowired
@@ -70,14 +64,10 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
+        //关闭csrf
         http.csrf().disable()
-                //使用JWT,关闭Session
+                //关闭Session
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                //关闭csrf验证
-                //自定义未登陆返回结果
-                .httpBasic().authenticationEntryPoint(authenticationEntryPoint)
                 .and()
                 //开放api路径
                 .authorizeRequests().antMatchers("/api/**","/five-service/blog-article/search/**","/five-service/blog-article/point","/five-service/blog-user/login").
@@ -104,11 +94,12 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
                 .and()
                 //添加token过滤器
                 .addFilter(new TokenAuthenticationFilter(authenticationManagerBean()));
-
-
     }
 
-
+    /**
+     * 身份认证失败处理类
+     * @return AuthenticationEntryPoint
+     */
     @Bean
     public AuthenticationEntryPoint selfLoginUrlAuthenticationEntryPoint() {
         return new SelfLoginUrlAuthenticationEntryPoint("/");

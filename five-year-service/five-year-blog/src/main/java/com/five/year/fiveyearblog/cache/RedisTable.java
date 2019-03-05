@@ -12,4 +12,6 @@ class RedisTable {
      * 用户空间
      */
     static final String BLOG_USER = "BLOG_USER";
+
+    static final String VALIDATE_CODE = "VALIDATE_CODE";
 }

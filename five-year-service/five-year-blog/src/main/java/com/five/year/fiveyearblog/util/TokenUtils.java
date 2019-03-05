@@ -46,7 +46,9 @@ public class TokenUtils {
         long expiration = rememberMe ? EXPIRATION_REMEMBER : EXPIRATION;
         String token = UUID.randomUUID().toString();
         blogUserCache.put(token,new BlogUser(userName,userPassword),expiration);
-        return new Cookie(REDIS_TABLE,token);
+        Cookie cookie = new Cookie(REDIS_TABLE, token);
+        cookie.setHttpOnly(true); //设置httpOnly，防止XSS攻击与csrf攻击
+        return cookie;
     }
 
     /**
@@ -56,6 +58,15 @@ public class TokenUtils {
      */
     public static BlogUser getUserByToken(String token){
         return blogUserCache.get(token);
+    }
+
+    /**
+     * 判断token是否失效
+     * @param token 用户手牌
+     * @return boolean
+     */
+    public static Boolean existByKey(String token){
+        return blogUserCache.isKeyExists(token);
     }
 
 }

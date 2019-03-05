@@ -27,6 +27,5 @@ public class UrlAuthenticationFailureHandler implements AuthenticationFailureHan
         writer.write(HttpResult.getJsonResult(401,"登陆失败"));
         writer.flush();
         writer.close();
-
     }
 }

@@ -128,7 +128,7 @@ export const postFromRequest = (url,body,callback) => {
 };
 
  //检测登陆
-export const checkLogin = () => {
+  export const checkLogin = (callback) => {
    fetch(loginUrl,{
      method : HttpMethod.GET,
      headers: getHeaders('from'),
@@ -136,9 +136,10 @@ export const checkLogin = () => {
    }).then(res =>{
      if (res.ok){
        res.json().then(data =>{
-         if(data.state == 403){
-           router.push('/user/login');
-         }
+         // if(data.state === 403){
+         //   router.push('/user/login');
+         // }
+         callback(data);
        })
      }
    })

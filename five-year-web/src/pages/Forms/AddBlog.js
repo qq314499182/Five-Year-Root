@@ -1,15 +1,14 @@
 import React, { PureComponent } from 'react';
-import { connect } from 'dva';
 import router from 'umi/router';
 import { formatMessage, FormattedMessage } from 'umi/locale';
-import {Form,Input, DatePicker, Select, Button, Card, InputNumber, Radio, Icon, Tooltip,} from 'antd';
+import {Form,Input,  Button, Card,  Radio,} from 'antd';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import Edit from 'wangeditor';
 import {checkLogin} from '@/utils/restfulUtils';
 import {serviceIP} from '@/config/serviceIP';
 
 const FormItem = Form.Item;
-const { TextArea } = Input;
+
 
 const baseUrl = serviceIP+'/five-service/blog-article/create';
 
@@ -24,23 +23,30 @@ class AddBlog extends PureComponent {
     }
   }
 
-  componentDidMount() {
-    checkLogin();
-    const elem = this.node;
-    const editor = new Edit(elem);
-    editor.customConfig.uploadImgShowBase64 = true;
-    editor.customConfig.zIndex = 100;
-    editor.customConfig.onchange = (html) => {
-      this.setState({
-        editorHtml: html,
-        editorText: editor.txt.text()
-      });
+  componentWillMount(){
+    checkLogin(data =>{
+      if(data.state === 403){
+        router.push('/user/login');
+      }
+    })
+  }
 
-      this.props.form.setFieldsValue({
-        'content': html
-      });
-    }
-    editor.create();
+
+  componentDidMount() {
+     const elem = this.node;
+     const editor = new Edit(elem);
+     editor.customConfig.uploadImgShowBase64 = true;
+     editor.customConfig.zIndex = 100;
+     editor.customConfig.onchange = (html) => {
+       this.setState({
+         editorHtml: html,
+         editorText: editor.txt.text()
+       });
+       this.props.form.setFieldsValue({
+         'content': html
+       });
+     };
+     editor.create();
   }
 
   handleSubmit = () => {
@@ -124,7 +130,7 @@ class AddBlog extends PureComponent {
                   }
                 ],
               })(
-                <div style={{ width: 700 }} ref={node => this.node = node}></div>
+                <div style={{ width: 700 }} ref={node => this.node = node}/>
               )}
             </FormItem>
             <FormItem {...formItemLayout} label="是否公开">
@@ -153,7 +159,7 @@ class AddBlog extends PureComponent {
               </div>
             </FormItem>
             <FormItem {...submitFormLayout} style={{ marginTop: 32 }}>
-              <Button type="primary" onClick={this.handleSubmit} >
+              <Button type="primary" onClick={this.handleSubmit}  >
                 <FormattedMessage id="提交" />
               </Button>
               <Button style={{ marginLeft: 20 }}>
