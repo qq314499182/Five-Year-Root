@@ -70,7 +70,7 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 //开放api路径
-                .authorizeRequests().antMatchers("/api/**","/five-service/blog-article/search/**","/five-service/blog-article/point","/five-service/blog-user/login").
+                .authorizeRequests().antMatchers("/five-service/api/**","/five-service/blog-article/search/**","/five-service/blog-article/point","/five-service/blog-user/login").
                 permitAll()
                 .anyRequest().authenticated()
                 //开启自动配置的登陆功能

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'dva';
 import { formatMessage, FormattedMessage } from 'umi/locale';
 import Link from 'umi/link';
 import { Checkbox, Alert, Icon } from 'antd';
@@ -82,7 +81,7 @@ class LoginPage extends Component {
               this.renderMessage(formatMessage({ id: 'app.login.message-invalid-credentials' }))}
             <UserName
               name="userName"
-              placeholder={`${formatMessage({ id: 'app.login.userName' })}: admin or user`}
+              placeholder={`${formatMessage({ id: 'app.login.userName' })}`}
               rules={[
                 {
                   required: true,
@@ -92,7 +91,7 @@ class LoginPage extends Component {
             />
             <Password
               name="userPassword"
-              placeholder={`${formatMessage({ id: 'app.login.password' })}: ant.design`}
+              placeholder={`${formatMessage({ id: 'app.login.password' })}`}
               rules={[
                 {
                   required: true,

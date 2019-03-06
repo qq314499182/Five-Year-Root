@@ -4,10 +4,10 @@ import omit from 'omit.js';
 import styles from './index.less';
 import ItemMap from './map';
 import LoginContext from './loginContext';
-
+import {serviceIP} from '@/config/serviceIP';
 const FormItem = Form.Item;
 
-const srcUrl = 'http://localhost:8080/api/getCode?';
+const srcUrl = serviceIP+'/five-service/api/getCode';
 
 class WrapFormItem extends Component {
   static defaultProps = {
@@ -69,7 +69,7 @@ class WrapFormItem extends Component {
   };
 
   getValidate =() => {
-    const imgUrl = srcUrl+'?id='+new Date();
+    const imgUrl = srcUrl+'?id='+new Date().getTime();
     this.setState({url:imgUrl})
   };
 
@@ -130,7 +130,7 @@ class WrapFormItem extends Component {
               {getFieldDecorator(name, options)(<Input {...customprops} {...inputProps} />)}
             </Col>
             <Col span={8}>
-              <a onClick={this.getValidate}><img id={'validate'} src={this.state.url} /></a>
+              <a onClick={this.getValidate}><img src={this.state.url} /></a>
             </Col>
           </Row>
         </FormItem>
