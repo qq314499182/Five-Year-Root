@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
  * @Description
@@ -45,6 +46,12 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
      */
     @Autowired
     private UrlLogoutSuccessHandler logoutSuccessHandler;
+
+    /**
+     * 验证码过滤器
+     */
+    @Autowired
+    private ValidateFilter validateFilter;
 
 
     /**
@@ -93,7 +100,9 @@ public class WebSecurityConfigure extends WebSecurityConfigurerAdapter {
                 .logoutSuccessHandler(logoutSuccessHandler).permitAll()
                 .and()
                 //添加token过滤器
-                .addFilter(new TokenAuthenticationFilter(authenticationManagerBean()));
+                .addFilter(new TokenAuthenticationFilter(authenticationManagerBean()))
+               //添加验证码过滤器
+                .addFilterBefore(validateFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     /**

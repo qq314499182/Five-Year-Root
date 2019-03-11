@@ -24,7 +24,7 @@ public class UrlAuthenticationFailureHandler implements AuthenticationFailureHan
         httpServletResponse.setCharacterEncoding("UTF-8");
         httpServletResponse.setStatus(401);
         PrintWriter writer = httpServletResponse.getWriter();
-        writer.write(HttpResult.getJsonResult(401,"登陆失败"));
+        writer.write(HttpResult.getJsonResult(401,e.getMessage()));
         writer.flush();
         writer.close();
     }
