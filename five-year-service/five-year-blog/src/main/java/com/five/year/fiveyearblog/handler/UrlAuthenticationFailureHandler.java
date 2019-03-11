@@ -22,7 +22,7 @@ public class UrlAuthenticationFailureHandler implements AuthenticationFailureHan
     @Override
     public void onAuthenticationFailure(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException {
         httpServletResponse.setCharacterEncoding("UTF-8");
-        httpServletResponse.setStatus(401);
+        httpServletResponse.setStatus(200);
         PrintWriter writer = httpServletResponse.getWriter();
         writer.write(HttpResult.getJsonResult(401,e.getMessage()));
         writer.flush();
