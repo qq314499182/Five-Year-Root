@@ -130,7 +130,7 @@ componentDidMount(){
     const loadMore =
       this.state.data.length > 0 ? (
         <div style={{ textAlign: 'center', marginTop: 16 }}>
-          <Button onClick={this.fetchMore} style={{ paddingLeft: 48, paddingRight: 48 }} htmlType={}>
+          <Button onClick={this.fetchMore} style={{ paddingLeft: 48, paddingRight: 48 }} >
             {this.state.loading ? (
               <span>
                 <Icon type="loading" /> 加载中...
