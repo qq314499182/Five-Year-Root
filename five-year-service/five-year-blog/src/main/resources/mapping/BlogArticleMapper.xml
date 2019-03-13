@@ -27,9 +27,13 @@
     from BLOG_ARTICLE
     where ID = #{id,jdbcType=VARCHAR}
   </select>
+    <sql id="Blog_Home" >
+        ID, TITLE, CATEGORY, CONTENT_LIST, READ_NUM, POINT_NUM, OPENED, IS_TOP, ARTICLE_CAT, TS,
+        CREATE_ID, CREATE_TIME
+    </sql>
   <select id="selectAll" resultMap="BaseResultMap" >
     select
-    <include refid="Base_Column_List" />
+    <include refid="Blog_Home" />
     from BLOG_ARTICLE
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >

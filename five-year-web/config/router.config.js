@@ -43,6 +43,12 @@ export default [
       // },
       // forms
       {
+        path: '/home',
+        icon: 'home',
+        name: 'home',
+        component:'./List/Homepage'
+      },
+      {
         path: '/form/add-blog',
         icon: 'form',
         name: 'add.blog',
@@ -95,60 +101,6 @@ export default [
       },
       // list
       {
-        path: '/list',
-        icon: 'table',
-        name: 'list',
-        routes: [
-          // {
-          //   path: '/list/table-list',
-          //   name: 'searchtable',
-          //   component: './List/TableList',
-          // },
-          // {
-          //   path: '/list/basic-list',
-          //   name: 'basiclist',
-          //   component: './List/BasicList',
-          // },
-          // {
-          //   path: '/list/card-list',
-          //   name: 'cardlist',
-          //   component: './List/CardList',
-          // },
-          {
-            path: '/list/search',
-            name: 'searchlist',
-            component: './List/List',
-            routes: [
-              {
-                path: '/list/search',
-                redirect: '/list/search/articles',
-              },
-              {
-                path: '/list/search/articles',
-                name: 'articles',
-                component: './List/Articles',
-              },
-              {
-                path: '/list/search/projects',
-                name: 'projects',
-                component: './List/Projects',
-              },
-              {
-                path: '/list/search/applications',
-                name: 'applications',
-                component: './List/Applications',
-              },
-              {
-                path: '/list/search/homepage',
-                name: '首页',
-                component: './List/Homepage',
-                hideInMenu: true,
-              },
-            ],
-          },
-        ],
-      },
-      {
         path: '/profile/BlogDetail',
         name: '文章详情',
         icon: 'profile',
@@ -180,7 +132,6 @@ export default [
         path: '/result',
         hideInMenu: true,
         routes: [
-          // result
           {
             path: '/result/success',
             name: 'success',

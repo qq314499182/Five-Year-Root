@@ -86,7 +86,7 @@ public class BlogArticleService extends BaseService<BlogArticle> {
         if(blogUserCache.isKeyExists(cookie)){
             BlogUser blogUser = blogUserCache.get(cookie);
             PageHelper.startPage(pageNum,pageSize);
-            List<BlogArticle> list = mapper.selectByUser(blogUser.getCreateId());
+            List<BlogArticle> list = mapper.selectByUser(blogUser.getId());
             return new PageInfo<>(list);
         }else {
             return new PageInfo<>();

@@ -4,8 +4,8 @@ import com.five.year.fiveyearblog.base.BaseService;
 import com.five.year.fiveyearblog.entity.BlogUser;
 import com.five.year.fiveyearblog.mapper.BlogUserMapper;
 import com.five.year.fiveyearblog.util.HttpResult;
+import com.five.year.fiveyearblog.util.IpUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.tomcat.util.security.Escape;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -49,7 +49,7 @@ public class BlogUserService extends BaseService<BlogUser> {
     }
 
     public HttpResult checkLogin(HttpServletRequest request) {
-        log.info("该用户已登陆");
+        log.info("该用户已登陆:  IP地址为  "+ IpUtils.getIPAddress(request));
         return HttpResult.getResult(200,"用户已登陆");
     }
 }
