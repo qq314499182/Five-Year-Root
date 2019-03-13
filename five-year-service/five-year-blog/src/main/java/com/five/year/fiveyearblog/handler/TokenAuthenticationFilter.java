@@ -2,6 +2,7 @@ package com.five.year.fiveyearblog.handler;
 
 import com.five.year.fiveyearblog.entity.BlogUser;
 import com.five.year.fiveyearblog.util.TokenUtils;
+import com.five.year.fiveyearblog.util.UserThreadLocal;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -43,6 +44,8 @@ public class TokenAuthenticationFilter extends BasicAuthenticationFilter {
         }
         if(StringUtils.isNotBlank(token) && TokenUtils.existByKey(token)){
             BlogUser user = TokenUtils.getUserByToken(token);
+            //将用户信息存入本地线程中，便于业务使用
+            UserThreadLocal.threadLocal.set(user);
             SecurityContextHolder.getContext().setAuthentication(
                     new UsernamePasswordAuthenticationToken(
                             user.getUsername(),user.getPassword(),new ArrayList<>()));

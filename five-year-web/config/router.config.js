@@ -16,74 +16,76 @@ export default [
     component: '../layouts/BasicLayout',
     routes: [
       // 首页
-      { path: '/', redirect: '/list/search/homepage' },
-      {
-        path: '/dashboard',
-        name: 'dashboard',
-        icon: 'dashboard',
-        routes: [
-          {
-            path: '/dashboard/analysis',
-            name: 'analysis',
-            component: './Dashboard/Analysis',
-          },
-          {
-            path: '/dashboard/monitor',
-            name: 'monitor',
-            component: './Dashboard/Monitor',
-          },
-          {
-            path: '/dashboard/workplace',
-            name: 'workplace',
-            component: './Dashboard/Workplace',
-          },
-        ],
+      { path: '/',
+        redirect: '/list/search/homepage'
       },
+      // {
+      //   path: '/dashboard',
+      //   name: 'dashboard',
+      //   icon: 'dashboard',
+      //   routes: [
+      //     {
+      //       path: '/dashboard/analysis',
+      //       name: 'analysis',
+      //       component: './Dashboard/Analysis',
+      //     },
+      //     {
+      //       path: '/dashboard/monitor',
+      //       name: 'monitor',
+      //       component: './Dashboard/Monitor',
+      //     },
+      //     {
+      //       path: '/dashboard/workplace',
+      //       name: 'workplace',
+      //       component: './Dashboard/Workplace',
+      //     },
+      //   ],
+      // },
       // forms
       {
         path: '/form/add-blog',
         icon: 'form',
         name: 'add.blog',
-        component: './Forms/AddBlog'
+        component: './Forms/AddBlog',
         // routes: [
-          // {
-          //   path: '/form/basic-form',
-          //   name: 'basicform',
-          //   component: './Forms/BasicForm',
-          // },
-          // {
-          //   path: '/form/step-form',
-          //   name: 'stepform',
-          //   component: './Forms/StepForm',
-          //   hideChildrenInMenu: true,
-          //   routes: [
-          //     {
-          //       path: '/form/step-form',
-          //       redirect: '/form/step-form/info',
-          //     },
-          //     {
-          //       path: '/form/step-form/info',
-          //       name: 'info',
-          //       component: './Forms/StepForm/Step1',
-          //     },
-          //     {
-          //       path: '/form/step-form/confirm',
-          //       name: 'confirm',
-          //       component: './Forms/StepForm/Step2',
-          //     },
-          //     {
-          //       path: '/form/step-form/result',
-          //       name: 'result',
-          //       component: './Forms/StepForm/Step3',
-          //     },
-          //   ],
-          // },
-          // {
-          //   path: '/form/advanced-form',
-          //   name: 'advancedform',
-          //   authority: ['admin'],
-          //   component: './Forms/AdvancedForm',
-          // },
+        //   {
+        //     path: '/form/basic-form',
+        //     name: 'basicform',
+        //     component: './Forms/BasicForm',
+        //   },
+        //   {
+        //     path: '/form/step-form',
+        //     name: 'stepform',
+        //     component: './Forms/StepForm',
+        //     hideChildrenInMenu: true,
+        //     routes: [
+        //       {
+        //         path: '/form/step-form',
+        //         redirect: '/form/step-form/info',
+        //       },
+        //       {
+        //         path: '/form/step-form/info',
+        //         name: 'info',
+        //         component: './Forms/StepForm/Step1',
+        //       },
+        //       {
+        //         path: '/form/step-form/confirm',
+        //         name: 'confirm',
+        //         component: './Forms/StepForm/Step2',
+        //       },
+        //       {
+        //         path: '/form/step-form/result',
+        //         name: 'result',
+        //         component: './Forms/StepForm/Step3',
+        //       },
+        //     ],
+        //   },
+        //   {
+        //     path: '/form/advanced-form',
+        //     name: 'advancedform',
+        //     authority: ['admin'],
+        //     component: './Forms/AdvancedForm',
+        //   },
         //   {
         //     path: '/form/add-blog',
         //     name: '新增文章',
@@ -97,21 +99,21 @@ export default [
         icon: 'table',
         name: 'list',
         routes: [
-          {
-            path: '/list/table-list',
-            name: 'searchtable',
-            component: './List/TableList',
-          },
-          {
-            path: '/list/basic-list',
-            name: 'basiclist',
-            component: './List/BasicList',
-          },
-          {
-            path: '/list/card-list',
-            name: 'cardlist',
-            component: './List/CardList',
-          },
+          // {
+          //   path: '/list/table-list',
+          //   name: 'searchtable',
+          //   component: './List/TableList',
+          // },
+          // {
+          //   path: '/list/basic-list',
+          //   name: 'basiclist',
+          //   component: './List/BasicList',
+          // },
+          // {
+          //   path: '/list/card-list',
+          //   name: 'cardlist',
+          //   component: './List/CardList',
+          // },
           {
             path: '/list/search',
             name: 'searchlist',
@@ -147,33 +149,36 @@ export default [
         ],
       },
       {
-        path: '/profile',
-        name: 'profile',
+        path: '/profile/BlogDetail',
+        name: '文章详情',
         icon: 'profile',
-        routes: [
-          // profile
-          {
-            path: '/profile/basic',
-            name: 'basic',
-            component: './Profile/BasicProfile',
-          },
-          {
-            path: '/profile/advanced',
-            name: 'advanced',
-            authority: ['admin'],
-            component: './Profile/AdvancedProfile',
-          },
-          {
-            path: '/profile/BlogDetail',
-            name: '文章详情',
-            component: './Profile/BlogDetail',
-          },
-        ],
+        component: './Profile/BlogDetail',
+        hideInMenu: true,
+        // routes: [
+        //   // profile
+        //   {
+        //     path: '/profile/basic',
+        //     name: 'basic',
+        //     component: './Profile/BasicProfile',
+        //   },
+        //   {
+        //     path: '/profile/advanced',
+        //     name: 'advanced',
+        //     authority: ['admin'],
+        //     component: './Profile/AdvancedProfile',
+        //   },
+        //   {
+        //     path: '/profile/BlogDetail',
+        //     name: '文章详情',
+        //     component: './Profile/BlogDetail',
+        //   },
+        // ],
       },
       {
         name: 'result',
         icon: 'check-circle-o',
         path: '/result',
+        hideInMenu: true,
         routes: [
           // result
           {
@@ -181,38 +186,41 @@ export default [
             name: 'success',
             component: './Result/Success',
           },
-          { path: '/result/fail', name: 'fail', component: './Result/Error' },
-        ],
-      },
-      {
-        name: 'exception',
-        icon: 'warning',
-        path: '/exception',
-        routes: [
-          // exception
-          {
-            path: '/exception/403',
-            name: 'not-permission',
-            component: './Exception/403',
-          },
-          {
-            path: '/exception/404',
-            name: 'not-find',
-            component: './Exception/404',
-          },
-          {
-            path: '/exception/500',
-            name: 'server-error',
-            component: './Exception/500',
-          },
-          {
-            path: '/exception/trigger',
-            name: 'trigger',
-            hideInMenu: true,
-            component: './Exception/TriggerException',
+          { path: '/result/fail',
+            name: 'fail',
+            component: './Result/Error'
           },
         ],
       },
+      // {
+      //   name: 'exception',
+      //   icon: 'warning',
+      //   path: '/exception',
+      //   routes: [
+      //     // exception
+      //     {
+      //       path: '/exception/403',
+      //       name: 'not-permission',
+      //       component: './Exception/403',
+      //     },
+      //     {
+      //       path: '/exception/404',
+      //       name: 'not-find',
+      //       component: './Exception/404',
+      //     },
+      //     {
+      //       path: '/exception/500',
+      //       name: 'server-error',
+      //       component: './Exception/500',
+      //     },
+      //     {
+      //       path: '/exception/trigger',
+      //       name: 'trigger',
+      //       hideInMenu: true,
+      //       component: './Exception/TriggerException',
+      //     },
+      //   ],
+      // },
       {
         name: 'account',
         icon: 'user',
@@ -270,15 +278,15 @@ export default [
           },
         ],
       },
-      {
-        path: 'test/test-list',
-        component:'./Test/Test',
-        name: "文档",
-        icon: 'dashboard'
-      },
-      {
-        component: '404',
-      },
+      // {
+      //   path: 'test/test-list',
+      //   component:'./Test/Test',
+      //   name: "文档",
+      //   icon: 'dashboard'
+      // },
+      // {
+      //   component: '404',
+      // },
     ],
   },
 ];

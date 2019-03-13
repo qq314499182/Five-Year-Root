@@ -28,8 +28,8 @@ public class TokenUtils {
     //cookie名称
     public static final String REDIS_TABLE = "LOGIN_TOKEN";
 
-    // 过期时间是1800秒，既是30分钟
-    private static final long EXPIRATION = 1800L;
+    // 过期时间是1800*24秒，既是12小时
+    private static final long EXPIRATION = 1800L*24;
 
     // 选择了记住我之后的过期时间为7天
     private static final long EXPIRATION_REMEMBER = 604800L;
@@ -40,13 +40,14 @@ public class TokenUtils {
      * @return Cookie 带有token的cookie信息
      */
     public static Cookie createToken(HttpServletRequest request){
-        String userName = request.getParameter("userName");
-        String userPassword = request.getParameter("userPassword");
         Boolean rememberMe = "1".equals(request.getParameter("rememberMe"));
         long expiration = rememberMe ? EXPIRATION_REMEMBER : EXPIRATION;
         String token = UUID.randomUUID().toString();
-        blogUserCache.put(token,new BlogUser(userName,userPassword),expiration);
+        BlogUser blogUser = UserThreadLocal.threadLocal.get();
+        blogUserCache.put(token,blogUser,expiration);
         Cookie cookie = new Cookie(REDIS_TABLE, token);
+        cookie.setPath("www.five-year.com");
+        cookie.setMaxAge(-1); //设置会话及，不关闭浏览器不会失效
         cookie.setHttpOnly(true); //设置httpOnly，防止XSS攻击与csrf攻击
         return cookie;
     }

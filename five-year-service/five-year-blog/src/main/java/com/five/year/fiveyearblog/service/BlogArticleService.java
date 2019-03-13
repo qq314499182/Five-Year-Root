@@ -1,16 +1,18 @@
 package com.five.year.fiveyearblog.service;
 
 import com.five.year.fiveyearblog.base.BaseService;
+import com.five.year.fiveyearblog.cache.BlogUserCache;
 import com.five.year.fiveyearblog.entity.BlogArticle;
+import com.five.year.fiveyearblog.entity.BlogUser;
 import com.five.year.fiveyearblog.mapper.BlogArticleMapper;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.List;
@@ -26,6 +28,9 @@ public class BlogArticleService extends BaseService<BlogArticle> {
 
     @Autowired
     private BlogArticleMapper mapper;
+
+    @Autowired
+    private BlogUserCache blogUserCache;
 
     public BlogArticle findOne(String id) {
         return mapper.selectByPrimaryKey(id);
@@ -69,5 +74,22 @@ public class BlogArticleService extends BaseService<BlogArticle> {
         blogArticle.setPointNum(blogArticle.getPointNum().add(BigDecimal.ONE));
         mapper.updateByPrimaryKeySelective(blogArticle);
         return "OK";
+    }
+
+    /**
+     * 返回指定用户文章信息
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    public PageInfo<BlogArticle> findByUserPage(String cookie, Integer pageNum, Integer pageSize) {
+        if(blogUserCache.isKeyExists(cookie)){
+            BlogUser blogUser = blogUserCache.get(cookie);
+            PageHelper.startPage(pageNum,pageSize);
+            List<BlogArticle> list = mapper.selectByUser(blogUser.getCreateId());
+            return new PageInfo<>(list);
+        }else {
+            return new PageInfo<>();
+        }
     }
 }

@@ -58,7 +58,8 @@ class AddBlog extends PureComponent {
             'content-type': 'application/json;charset=UTF-8'
           },
           method:"post",
-          body:JSON.stringify(values)
+          body:JSON.stringify(values),
+          credentials: "include"
         };
         fetch(baseUrl,opts).then(res=>{
           if(res.ok){

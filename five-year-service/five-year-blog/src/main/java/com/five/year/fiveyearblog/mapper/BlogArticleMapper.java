@@ -29,4 +29,6 @@ public interface BlogArticleMapper {
     int updateByPrimaryKey(BlogArticle record);
 
     List<BlogArticle> selectAll();
+
+    List<BlogArticle> selectByUser(String createId);
 }

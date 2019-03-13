@@ -69,8 +69,9 @@ export const postRequest = (url,body,callback) => {
   fetch(url,{
     method : HttpMethod.POST,
     headers: getHeaders('json'),
-    body : JSON.stringify(body)
-  }).then((response) => {
+    body : JSON.stringify(body),
+    credentials: "include"
+  }).then(response=> {
     if(response.status === 200){
       return response.json();
     }

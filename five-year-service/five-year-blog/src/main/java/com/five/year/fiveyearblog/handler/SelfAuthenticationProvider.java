@@ -1,5 +1,7 @@
 package com.five.year.fiveyearblog.handler;
 
+import com.five.year.fiveyearblog.entity.BlogUser;
+import com.five.year.fiveyearblog.util.UserThreadLocal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -33,6 +35,7 @@ public class SelfAuthenticationProvider implements AuthenticationProvider {
         String password = (String) authentication.getCredentials();
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
         if(bCryptPasswordEncoder.matches(password,userDetails.getPassword())){
+            UserThreadLocal.threadLocal.set((BlogUser)userDetails);
             return new UsernamePasswordAuthenticationToken(username,password,null);
         }else {
             throw new BadCredentialsException("密码错误");

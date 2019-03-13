@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * @Description
+ * @Description 用户权限
  * @Author zhaoke <zhaokep@yonyou.com>
  * @Version V1.0.0
  * @Date 2019/1/24

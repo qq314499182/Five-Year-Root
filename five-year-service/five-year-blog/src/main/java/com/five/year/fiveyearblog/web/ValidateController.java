@@ -17,7 +17,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 /**
- * @Description
+ * @Description 验证码
  * @Author 五岁 <zhaokep@yonyou.com>
  * @Version V1.0.0
  * @Date 2019/3/4

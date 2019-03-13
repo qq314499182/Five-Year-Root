@@ -197,4 +197,14 @@
       CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
     where ID = #{id,jdbcType=VARCHAR}
   </update>
+
+  <sql id="selectByUser_param">
+    ID,TITLE,READ_NUM,POINT_NUM,CREATE_TIME
+  </sql>
+  <select id="selectByUser" resultMap="BaseResultMap" parameterType="java.lang.String">
+      select
+    <include refid="selectByUser_param"/>
+      from BLOG_ARTICLE
+      where CREATE_ID = #{createId,jdbcType=VARCHAR}
+  </select>
 </mapper>
