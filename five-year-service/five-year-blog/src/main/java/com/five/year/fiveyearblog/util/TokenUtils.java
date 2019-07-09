@@ -25,13 +25,19 @@ public class TokenUtils {
         TokenUtils.blogUserCache = blogUserCache;
     }
 
-    //cookie名称
+    /**
+     *   cookie名称
+     */
     public static final String REDIS_TABLE = "LOGIN_TOKEN";
 
-    // 过期时间是1800*24秒，既是12小时
+    /**
+     * 过期时间是1800*24秒，既是12小时
+     */
     private static final long EXPIRATION = 1800L*24;
 
-    // 选择了记住我之后的过期时间为7天
+    /**
+     * 选择了记住我之后的过期时间为7天
+     */
     private static final long EXPIRATION_REMEMBER = 604800L;
 
     /**
@@ -40,7 +46,7 @@ public class TokenUtils {
      * @return Cookie 带有token的cookie信息
      */
     public static Cookie createToken(HttpServletRequest request){
-        Boolean rememberMe = "1".equals(request.getParameter("rememberMe"));
+        boolean rememberMe = "1".equals(request.getParameter("rememberMe"));
         long expiration = rememberMe ? EXPIRATION_REMEMBER : EXPIRATION;
         String token = UUID.randomUUID().toString();
         BlogUser blogUser = UserThreadLocal.threadLocal.get();

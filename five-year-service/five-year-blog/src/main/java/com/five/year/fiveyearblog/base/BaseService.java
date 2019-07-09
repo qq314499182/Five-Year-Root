@@ -1,5 +1,6 @@
 package com.five.year.fiveyearblog.base;
 
+import com.five.year.fiveyearblog.entity.BlogUser;
 import com.five.year.fiveyearblog.util.UserThreadLocal;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.Assert;
@@ -26,7 +27,11 @@ public class BaseService<TEntity extends BaseEntity> {
         final Date date = new Date();
         entity.setId(UUID.randomUUID().toString());
         entity.setTs(date);
-        entity.setCreateId(UserThreadLocal.threadLocal.get().getId());
+        BlogUser blogUser = UserThreadLocal.threadLocal.get();
+        //区分注册还是其他
+        if(blogUser != null){
+            entity.setCreateId(blogUser.getId());
+        }
         entity.setCreateTime(date);
         return entity;
     }

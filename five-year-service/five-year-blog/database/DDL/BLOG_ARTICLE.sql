@@ -28,7 +28,7 @@ comment on column BLOG_ARTICLE.TITLE is
 comment on column BLOG_ARTICLE.CATEGORY is
 '个人分类';
 
-comment on column BLOG_ARTICLE.CONTEXT is
+comment on column BLOG_ARTICLE.CONTENT is
 '内容';
 
 comment on column BLOG_ARTICLE.READ_NUM is
@@ -40,7 +40,7 @@ comment on column BLOG_ARTICLE.POINT_NUM is
 comment on column BLOG_ARTICLE.OPENED is
 '是否公开';
 
-comment on column BLOG_ARTICLE.TOP is
+comment on column BLOG_ARTICLE.IS_TOP is
 '是否置顶';
 
 comment on column BLOG_ARTICLE.ARTICLE_CAT is
@@ -49,8 +49,8 @@ comment on column BLOG_ARTICLE.ARTICLE_CAT is
 comment on column BLOG_ARTICLE.TS is
 '时间戳';
 
-comment on column BLOG_ARTICLE.CREAT_ID is
+comment on column BLOG_ARTICLE.CREATE_ID is
 '创建人ID';
 
-comment on column BLOG_ARTICLE.CREAT_TIME is
+comment on column BLOG_ARTICLE.CREATE_TIME is
 '创建时间';

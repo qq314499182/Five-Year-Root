@@ -3,11 +3,8 @@ package com.five.year.fiveyearblog.entity;
 import com.five.year.fiveyearblog.base.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
-import oracle.sql.CLOB;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
 @Setter
 @Getter
 public class BlogArticle extends BaseEntity {
